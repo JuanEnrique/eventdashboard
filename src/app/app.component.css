@@ -7,11 +7,14 @@
 
   .admin-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    align-items: stretch;
+    background-color: #d4bf99;
   }
 
   .sidebar {
-    width: 250px;
+    width: 10%;
+    min-height: 100vh;
     background-color: #d89416;
     color: white;
     padding: 20px;
@@ -34,7 +37,6 @@
     color: white;
     text-decoration: none;
     display: block;
-    padding: 10px;
     border-radius: 5px;
     transition: background 0.3s;
   }
@@ -44,7 +46,9 @@
   }
 
   .content {
-    min-height: 100vh; /* Que ocupe al menos toda la pantalla */
     display: flex;
-    flex-direction: column; /* Asegura que los hijos (componentes) se apilen */
+    flex-grow: 1;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-left: 10%;
   }
