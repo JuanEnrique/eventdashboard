@@ -1,0 +1,49 @@
+<button (click)="actformempleado()">Introducir empleado</button>
+<button (click)="actformevento()">Introducir Evento</button>
+
+@if(empleado){
+    <div>
+        <form>
+            <label>Nombre:</label>
+            <input type="text" formControlName="nombre" />
+            
+            <label>Apellido:</label>
+            <input type="text" formControlName="apellido" />
+          
+            <label>Alias:</label>
+            <input type="text" formControlName="alias" />
+          
+            <label>Email:</label>
+            <input type="email" formControlName="email" />
+          
+            <label>Teléfono:</label>
+            <input type="text" formControlName="telefono" />
+          
+            <label>DNI:</label>
+            <input type="text" formControlName="dni" />
+          
+            <label>NSS:</label>
+            <input type="text" formControlName="nss" />
+          
+            <label>Puesto:</label>
+            <input type="text" formControlName="puesto" />
+          
+            <label>Horas:</label>
+            <input type="number" formControlName="horas" />
+          
+            <label>IBAN:</label>
+            <input type="text" formControlName="iban" />
+          
+            <label>Doc. Prev:</label>
+            <input type="number" formControlName="docprev" />
+          
+            <button type="submit">Guardar</button>
+          </form>
+    </div>
+}
+
+@if(evento){
+    <div>
+        <p>Esto es para eventos</p>
+    </div>
+}
