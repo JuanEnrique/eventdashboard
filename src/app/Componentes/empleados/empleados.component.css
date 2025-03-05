@@ -9,21 +9,24 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #FFA870;
+    
   }
   
   th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    border: 1px solid #000;
   }
   
   th {
-    background-color: #d19e11;
+    background-color: #F05F00;
     color: white;
   }
   
   tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #FFC8A4;
   }
   
   tr:hover {
