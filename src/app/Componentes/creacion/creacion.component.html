@@ -3,47 +3,181 @@
 
 @if(empleado){
     <div>
-        <form>
-            <label>Nombre:</label>
-            <input type="text" formControlName="nombre" />
-            
-            <label>Apellido:</label>
-            <input type="text" formControlName="apellido" />
+        <form class="form_empleados">
+            <fieldset class="datos_personales">
+                <legend>Datos Personales</legend>
+                    <label>Nombre:</label>
+                    <input type="text" formControlName="nombre" />
+                    
+                    <label>Apellido:</label>
+                    <input type="text" formControlName="apellido" />
+                
+                    <label>Alias:</label>
+                    <input type="text" formControlName="alias" />
+                
+                    <label>Email:</label>
+                    <input type="email" formControlName="email" />
+                
+                    <label>Teléfono:</label>
+                    <input type="text" formControlName="telefono" />
+            </fieldset>
           
-            <label>Alias:</label>
-            <input type="text" formControlName="alias" />
-          
-            <label>Email:</label>
-            <input type="email" formControlName="email" />
-          
-            <label>Teléfono:</label>
-            <input type="text" formControlName="telefono" />
-          
-            <label>DNI:</label>
-            <input type="text" formControlName="dni" />
-          
-            <label>NSS:</label>
-            <input type="text" formControlName="nss" />
-          
-            <label>Puesto:</label>
-            <input type="text" formControlName="puesto" />
-          
-            <label>Horas:</label>
-            <input type="number" formControlName="horas" />
-          
-            <label>IBAN:</label>
-            <input type="text" formControlName="iban" />
-          
-            <label>Doc. Prev:</label>
-            <input type="number" formControlName="docprev" />
+            <fieldset class="datos_administrativos">
+                <legend>Datos Laborales</legend>
+                    <label>DNI:</label>
+                    <input type="text" formControlName="dni" />
+                
+                    <label>NSS:</label>
+                    <input type="text" formControlName="nss" />
+                
+                    <label>Puesto:</label>
+                    <input type="text" formControlName="puesto" />
+                
+                    <label>Horas:</label>
+                    <input type="number" formControlName="horas" />
+                
+                    <label>IBAN:</label>
+                    <input type="text" formControlName="iban" />
+                
+                    <label>Doc. Prev:</label>
+                    <input type="number" formControlName="docprev" />
+            </fieldset>
           
             <button type="submit">Guardar</button>
           </form>
     </div>
 }
 
-@if(evento){
+<!-- @if(evento){ -->
     <div>
-        <p>Esto es para eventos</p>
+        <form class="form_evento">
+            <fieldset class="datos_graduacion">
+                <legend>Datos principales Evento</legend>
+                    <label>Nº expediente:</label>
+                    <input type="text" formControlName="identificador" />
+                    
+                    <label>Nombre Colegio:</label>
+                    <input type="text" formControlName="nombre_colegio" />
+                
+                    <label>Curso:</label>
+                    <input type="email" formControlName="curso" />
+
+                    <label>fecha:</label>
+                    <input type="date" formControlName="fecha" />
+                
+                    <label>Población:</label>
+                    <input type="text" formControlName="poblacion" />
+            </fieldset>
+          
+            <fieldset class="datos_accefi"> <!--accefi = acto, cena y fiesta-->
+                <legend>Acto</legend>
+                    <label>Lugar:</label>
+                    <input type="text" formControlName="lugar_acto" />
+                
+                    <label>Hora:</label>
+                    <input type="text" formControlName="hora_acto" />
+                
+                    <label>Nº Graduados:</label>
+                    <input type="text" formControlName="nacto_graduados" />
+                
+                    <label>Nº Familiares:</label>
+                    <input type="number" formControlName="nacto_familiares" />
+                
+                    <label>audiovisuales:</label>
+                    <input type="text" formControlName="audiovisuales" />
+                
+                    <label>Anotaciones:</label>
+                    <input type="number" formControlName="acto_anotaciones" />
+            </fieldset>
+            <fieldset class="datos_accefi"> <!--accefi = acto, cena y fiesta-->
+                <legend>Cena</legend>
+                    <label>Lugar:</label>
+                    <input type="text" formControlName="lugar_cena" />
+                
+                    <label>Hora:</label>
+                    <input type="text" formControlName="hora_cena" />
+                
+                    <label>Nº Alumnos:</label>
+                    <input type="text" formControlName="ncena_alumnos" />
+                
+                    <label>Nº Profesores:</label>
+                    <input type="number" formControlName="ncena_profesores" />
+                
+                    <label>Menú:</label> <!--La idea es poner un textbox grande o hacerlo en otra pagina o algo-->
+                    <input type="text" formControlName="cena_menu" />
+                
+                    <label>Anotaciones:</label>
+                    <input type="number" formControlName="cena_anotaciones" />
+            </fieldset>
+            <fieldset class="datos_accefi"> <!--accefi = acto, cena y fiesta-->
+                <legend>Fiesta</legend>
+                    <label>Lugar:</label>
+                    <input type="text" formControlName="lugar_fiesta" />
+                
+                    <label>Hora:</label>
+                    <input type="text" formControlName="hora_fiesta" />
+                
+                    <label>Nº Gratuidades:</label>
+                    <input type="text" formControlName="nfiesta_gratuidades" />
+                
+                    <label>Nº asistentes:</label>
+                    <input type="number" formControlName="nfiesta_asistentes" />
+                
+                    <label>¿Se utilizaran todos los servicios basicos?:</label>
+                    <!--
+                    sonido profesional
+                    iluminacion robotica
+                    efectos y maquina de humo
+                    Dj profesional
+                    fotografo
+                    recena: - mcdonals o burguer king
+                    seguridad cualificada
+                    animaciones para fotos
+                    gliter bar
+                    barra libre alcohol 6 hotas
+                    barra libre refrescos 6 horas
+                    5 consumisiones + barra libre refrescos
+                    cartucho de gomitas
+                    
+                    -->
+                    <input type="text" formControlName="iban" />
+                
+                    <label>Extra gratis:</label>
+                    <!--
+                    Plataforma 360
+                    fotomaton
+                    little bar
+                    little makeup
+                    asistencia de maquillage y peluqueria                   
+                    
+                    -->
+                    <input type="number" formControlName="extra_gratis" />
+                    
+                    <label>Extras:</label>
+
+                    <!--
+                    
+                    Recena premium:
+                        pizza
+                        kebab
+                        mexicana
+                        hamburguesas y perritos
+                    
+                    tatuajes
+                    cachimba
+                    
+                    -->
+                    <input type="number" formControlName="extras" />
+
+                    <label>Intolerancias y alergias:</label>
+                    <input type="number" formControlName="extras" />
+
+                    <label>Anotaciones:</label>
+                    <input type="number" formControlName="extras" />
+
+            </fieldset>
+          
+            <button type="submit">Guardar</button>
+          </form>
     </div>
-}
+<!--}-->
