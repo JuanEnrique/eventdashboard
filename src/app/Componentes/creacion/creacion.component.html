@@ -53,14 +53,14 @@
         <form class="form_evento">
             <fieldset class="datos_graduacion">
                 <legend>Datos principales Evento</legend>
-                    <label>Nº expediente:</label>
+                    <label>Número expediente:</label>
                     <input type="text" formControlName="identificador" />
                     
                     <label>Nombre Colegio:</label>
                     <input type="text" formControlName="nombre_colegio" />
                 
                     <label>Curso:</label>
-                    <input type="email" formControlName="curso" />
+                    <input type="text" formControlName="curso" />
 
                     <label>fecha:</label>
                     <input type="date" formControlName="fecha" />
@@ -69,47 +69,68 @@
                     <input type="text" formControlName="poblacion" />
             </fieldset>
           
-            <fieldset class="datos_accefi"> <!--accefi = acto, cena y fiesta-->
+            <fieldset class="datos_acto">
                 <legend>Acto</legend>
+                    <div>
                     <label>Lugar:</label>
                     <input type="text" formControlName="lugar_acto" />
-                
+                </div>
+                <div>
                     <label>Hora:</label>
                     <input type="text" formControlName="hora_acto" />
-                
-                    <label>Nº Graduados:</label>
+                </div>
+                <div>
+                    <label>Número Graduados:</label>
                     <input type="text" formControlName="nacto_graduados" />
-                
-                    <label>Nº Familiares:</label>
+                </div>
+                <div>
+                    <label>Número Familiares:</label>
                     <input type="number" formControlName="nacto_familiares" />
-                
+                </div>
+                <div>
                     <label>audiovisuales:</label>
                     <input type="text" formControlName="audiovisuales" />
-                
+                </div>
+                <div class="anotaciones">
                     <label>Anotaciones:</label>
-                    <input type="number" formControlName="acto_anotaciones" />
+                    <textarea id="anotaciones_acto"></textarea>
+
+                </div>
+
             </fieldset>
-            <fieldset class="datos_accefi"> <!--accefi = acto, cena y fiesta-->
+            <fieldset class="datos_cena"> <!--accefi = acto, cena y fiesta-->
                 <legend>Cena</legend>
-                    <label>Lugar:</label>
-                    <input type="text" formControlName="lugar_cena" />
+
+                    <div>
+                        <label>Lugar:</label>
+                        <input type="text" formControlName="lugar_cena" />
+                    </div>
                 
-                    <label>Hora:</label>
-                    <input type="text" formControlName="hora_cena" />
+                    <div>
+                        <label>Hora:</label>
+                        <input type="text" formControlName="hora_cena" />
+                    </div>
                 
-                    <label>Nº Alumnos:</label>
-                    <input type="text" formControlName="ncena_alumnos" />
+                    <div>
+                        <label>Número Alumnos:</label>
+                        <input type="text" formControlName="ncena_alumnos" />
+                    </div>
                 
-                    <label>Nº Profesores:</label>
-                    <input type="number" formControlName="ncena_profesores" />
-                
-                    <label>Menú:</label> <!--La idea es poner un textbox grande o hacerlo en otra pagina o algo-->
-                    <input type="text" formControlName="cena_menu" />
-                
-                    <label>Anotaciones:</label>
-                    <input type="number" formControlName="cena_anotaciones" />
+                    <div>
+                        <label>Número Profesores:</label>
+                        <input type="number" formControlName="ncena_profesores" />
+                    </div>
+
+                    <div class="anotaciones">
+                        <label>Anotaciones:</label>
+                        <textarea></textarea>
+                    </div>
+                    <div class="anotaciones">
+                        <label>Menú:</label> <!--La idea es poner un textbox grande o hacerlo en otra pagina o algo-->
+                        <textarea></textarea>
+                    </div>
             </fieldset>
-            <fieldset class="datos_accefi"> <!--accefi = acto, cena y fiesta-->
+            <fieldset class="datos_fiesta"> <!--accefi = acto, cena y fiesta-->
                 <legend>Fiesta</legend>
                     <label>Lugar:</label>
                     <input type="text" formControlName="lugar_fiesta" />
@@ -117,10 +138,10 @@
                     <label>Hora:</label>
                     <input type="text" formControlName="hora_fiesta" />
                 
-                    <label>Nº Gratuidades:</label>
+                    <label>Número Gratuidades:</label>
                     <input type="text" formControlName="nfiesta_gratuidades" />
                 
-                    <label>Nº asistentes:</label>
+                    <label>Número asistentes:</label>
                     <input type="number" formControlName="nfiesta_asistentes" />
                 
                     <label>¿Se utilizaran todos los servicios basicos?:</label>
