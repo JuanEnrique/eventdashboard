@@ -56,7 +56,7 @@
                     <label>Número expediente:</label>
                     <input type="text" formControlName="identificador" />
                     
-                    <label>Nombre Colegio:</label>
+                    <label>Nombre del Centro:</label>
                     <input type="text" formControlName="nombre_colegio" />
                 
                     <label>Curso:</label>
@@ -77,11 +77,11 @@
                 </div>
                 <div>
                     <label>Hora:</label>
-                    <input type="text" formControlName="hora_acto" />
+                    <input type="time" formControlName="hora_acto" />
                 </div>
                 <div>
                     <label>Número Graduados:</label>
-                    <input type="text" formControlName="nacto_graduados" />
+                    <input type="number" formControlName="nacto_graduados" />
                 </div>
                 <div>
                     <label>Número Familiares:</label>
@@ -108,12 +108,12 @@
                 
                     <div>
                         <label>Hora:</label>
-                        <input type="text" formControlName="hora_cena" />
+                        <input type="time" formControlName="hora_cena" />
                     </div>
                 
                     <div>
                         <label>Número Alumnos:</label>
-                        <input type="text" formControlName="ncena_alumnos" />
+                        <input type="number" formControlName="ncena_alumnos" />
                     </div>
                 
                     <div>
@@ -125,76 +125,174 @@
                         <label>Anotaciones:</label>
                         <textarea></textarea>
                     </div>
+                    <!-- Modal del menú-->
+                    <div>
+                        <button type="button" (click)="openModal()">Menú</button>
+
+                        <app-modal [isOpen]="showModal" [title]="'Menú'" (close)="closeModal()">
+
+                            <textarea id="textarea_menu"></textarea>
+                            <button type="button" (click)="closeModal()">Cerrar</button>
+                        
+                        </app-modal>
+
+                    </div>
+
+            </fieldset>
+
+            <fieldset class="datos_fiesta">
+                <legend>Fiesta</legend>
+                    <div>
+                        <label>Lugar:</label>
+                        <input type="text" formControlName="lugar_fiesta" />
+                    </div>
+                
+                    <div>
+                        <label>Hora:</label>
+                        <input type="time" formControlName="hora_fiesta" />
+                    </div>
+                
+                    <div>
+                        <label>Número Gratuidades:</label>
+                        <input type="number" formControlName="nfiesta_gratuidades" />
+                    </div>
+                
+                    <div>
+                        <label>Número Asistentes:</label>
+                        <input type="number" formControlName="nfiesta_asistentes" />
+                    </div>
+                    <div class="bloque_fiesta">
+                        <label>¿Se utilizaran todos los servicios basicos?:</label><br>
+                        <!--
+                        sonido profesional
+                        iluminacion robotica
+                        efectos y maquina de humo
+                        Dj profesional
+                        fotografo
+                        recena: - mcdonals o burguer king
+                        seguridad cualificada
+                        animaciones para fotos
+                        gliter bar
+                        barra libre alcohol 6 hotas
+                        barra libre refrescos 6 horas
+                        5 consumisiones + barra libre refrescos
+                        cartucho de gomitas-->
+
+                            
+                        <label>
+                        <input type="checkbox" name="servicio" value="sonido_profesional"> Sonido profesional
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="iluminacion_robotica"> Iluminación robótica
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="efectos_maquina_humo"> Efectos y máquina de humo
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="dj_profesional"> DJ profesional
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="f otografo"> Fotógrafo
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="recena_mcdonalds"> Recena: McDonald's
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="recena_burger_king"> Recena: Burger King
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="seguridad_cualificada"> Seguridad cualificada
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="animaciones_fotos"> Animaciones para fotos
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="gliter_bar"> Gliter bar
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="barra_libre_alcohol"> Barra libre alcohol 6 horas
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="barra_libre_refrescos"> Barra libre refrescos 6 horas
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="5_consumisiones"> 5 consumisiones + barra libre refrescos
+                                                </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="cartucho_gomitas"> Cartucho de gomitas
+                                                </label><br>
+                    </div>
+                
+                    <div class="bloque_fiesta">
+                        <label>Extra gratis:</label><br>
+                        <!--
+                        Plataforma 360
+                        fotomaton
+                        little bar
+                        little makeup
+                        asistencia de maquillage y peluqueria
+                        
+                        -->
+                        <label>
+                            <input type="checkbox" name="servicio" value="plataforma_360"> Plataforma 360
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="servicio" value="fotomaton"> Fotomaton
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="servicio" value="little_bar"> Little bar
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="servicio" value="little_makeup"> Little makeup
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="servicio" value="asistencia_maquillaje_peluqueria"> Asistencia de maquillaje y peluquería
+                        </label><br>
+                    </div>
+                    
+                    <div class="bloque_fiesta">
+                        <label>Extras:</label><br>
+                        <!--
+                        
+                        Recena premium:
+                            pizza
+                            kebab
+                            mexicana
+                            hamburguesas y perritos
+                        
+                        tatuajes
+                        cachimba
+                        
+                        -->
+                        <label>
+                            <input type="checkbox" name="recena" value="recena_pizza"> Recena: Pizza
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="recena" value="recena-kebab"> Recena: Kebab
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="recena" value="recena-mexicana"> Recena: Mexicana
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="recena" value="recena-hamburguesas_perritos"> Recena: Hamburguesas y perritos
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="adicional" value="tatuajes"> Tatuajes
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="adicional" value="cachimba"> Cachimba
+                        </label><br>
+                    </div>
+
                     <div class="anotaciones">
-                        <label>Menú:</label> <!--La idea es poner un textbox grande o hacerlo en otra pagina o algo-->
+                        <label>Intolerancias y alergias:</label>
                         <textarea></textarea>
                     </div>
-            </fieldset>
-            <fieldset class="datos_fiesta"> <!--accefi = acto, cena y fiesta-->
-                <legend>Fiesta</legend>
-                    <label>Lugar:</label>
-                    <input type="text" formControlName="lugar_fiesta" />
-                
-                    <label>Hora:</label>
-                    <input type="text" formControlName="hora_fiesta" />
-                
-                    <label>Número Gratuidades:</label>
-                    <input type="text" formControlName="nfiesta_gratuidades" />
-                
-                    <label>Número asistentes:</label>
-                    <input type="number" formControlName="nfiesta_asistentes" />
-                
-                    <label>¿Se utilizaran todos los servicios basicos?:</label>
-                    <!--
-                    sonido profesional
-                    iluminacion robotica
-                    efectos y maquina de humo
-                    Dj profesional
-                    fotografo
-                    recena: - mcdonals o burguer king
-                    seguridad cualificada
-                    animaciones para fotos
-                    gliter bar
-                    barra libre alcohol 6 hotas
-                    barra libre refrescos 6 horas
-                    5 consumisiones + barra libre refrescos
-                    cartucho de gomitas
-                    
-                    -->
-                    <input type="text" formControlName="iban" />
-                
-                    <label>Extra gratis:</label>
-                    <!--
-                    Plataforma 360
-                    fotomaton
-                    little bar
-                    little makeup
-                    asistencia de maquillage y peluqueria                   
-                    
-                    -->
-                    <input type="number" formControlName="extra_gratis" />
-                    
-                    <label>Extras:</label>
 
-                    <!--
-                    
-                    Recena premium:
-                        pizza
-                        kebab
-                        mexicana
-                        hamburguesas y perritos
-                    
-                    tatuajes
-                    cachimba
-                    
-                    -->
-                    <input type="number" formControlName="extras" />
-
-                    <label>Intolerancias y alergias:</label>
-                    <input type="number" formControlName="extras" />
-
-                    <label>Anotaciones:</label>
-                    <input type="number" formControlName="extras" />
+                    <div class="anotaciones">
+                        <label>Anotaciones:</label>
+                        <textarea></textarea>
+                    </div>
 
             </fieldset>
           
