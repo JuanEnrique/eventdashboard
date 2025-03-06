@@ -3,7 +3,7 @@
 
 @if(empleado){
     <div>
-        <form class="form_empleados">
+        <form [formGroup]="formulario_empleado" (ngSubmit)="onSubmit_empleado()" class="form_empleados">
             <fieldset class="datos_personales">
                 <legend class="legend_text">Datos Personales</legend>
                     <div>
