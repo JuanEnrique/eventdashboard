@@ -5,7 +5,7 @@
     <div>
         <form class="form_empleados">
             <fieldset class="datos_personales">
-                <legend>Datos Personales</legend>
+                <legend class="legend_text">Datos Personales</legend>
                     <label>Nombre:</label>
                     <input type="text" formControlName="nombre" />
                     
@@ -23,7 +23,7 @@
             </fieldset>
           
             <fieldset class="datos_administrativos">
-                <legend>Datos Laborales</legend>
+                <legend class="legend_text">Datos Laborales</legend>
                     <label>DNI:</label>
                     <input type="text" formControlName="dni" />
                 
@@ -48,11 +48,11 @@
     </div>
 }
 
-<!-- @if(evento){ -->
+@if(evento){
     <div>
         <form class="form_evento">
             <fieldset class="datos_graduacion">
-                <legend>Datos principales Evento</legend>
+                <legend class="legend_text">Datos principales Evento</legend>
                     <label>Número expediente:</label>
                     <input type="text" formControlName="identificador" />
                     
@@ -70,7 +70,7 @@
             </fieldset>
           
             <fieldset class="datos_acto">
-                <legend>Acto</legend>
+                <legend class="legend_text">Acto</legend>
                     <div>
                     <label>Lugar:</label>
                     <input type="text" formControlName="lugar_acto" />
@@ -99,7 +99,7 @@
 
             </fieldset>
             <fieldset class="datos_cena"> <!--accefi = acto, cena y fiesta-->
-                <legend>Cena</legend>
+                <legend class="legend_text">Cena</legend>
 
                     <div>
                         <label>Lugar:</label>
@@ -141,7 +141,7 @@
             </fieldset>
 
             <fieldset class="datos_fiesta">
-                <legend>Fiesta</legend>
+                <legend class="legend_text">Fiesta</legend>
                     <div>
                         <label>Lugar:</label>
                         <input type="text" formControlName="lugar_fiesta" />
@@ -161,6 +161,7 @@
                         <label>Número Asistentes:</label>
                         <input type="number" formControlName="nfiesta_asistentes" />
                     </div>
+                    <div style="margin-right: 100%;"></div>
                     <div class="bloque_fiesta">
                         <label>¿Se utilizaran todos los servicios basicos?:</label><br>
                         <!--
@@ -185,9 +186,14 @@
                                                 <label>
                         <input type="checkbox" name="servicio" value="iluminacion_robotica"> Iluminación robótica
                                                 </label><br>
+
                                                 <label>
                         <input type="checkbox" name="servicio" value="efectos_maquina_humo"> Efectos y máquina de humo
                                                 </label><br>
+                                                <label>
+                        <input type="checkbox" name="servicio" value="Guarda_ropa"> Guarda ropa Gratuito
+                                                </label><br>
+                                                
                                                 <label>
                         <input type="checkbox" name="servicio" value="dj_profesional"> DJ profesional
                                                 </label><br>
@@ -228,8 +234,8 @@
                         <!--
                         Plataforma 360
                         fotomaton
-                        little bar
-                        little makeup
+                        Glitter bar
+                        Glitter makeup
                         asistencia de maquillage y peluqueria
                         
                         -->
@@ -240,10 +246,10 @@
                             <input type="checkbox" name="servicio" value="fotomaton"> Fotomaton
                         </label><br>
                         <label>
-                            <input type="checkbox" name="servicio" value="little_bar"> Little bar
+                            <input type="checkbox" name="servicio" value="Glitter_bar"> Glitter bar
                         </label><br>
                         <label>
-                            <input type="checkbox" name="servicio" value="little_makeup"> Little makeup
+                            <input type="checkbox" name="servicio" value="Glitter_makeup"> Glitter makeup
                         </label><br>
                         <label>
                             <input type="checkbox" name="servicio" value="asistencia_maquillaje_peluqueria"> Asistencia de maquillaje y peluquería
@@ -299,4 +305,4 @@
             <button type="submit">Guardar</button>
           </form>
     </div>
-<!--}-->
+}

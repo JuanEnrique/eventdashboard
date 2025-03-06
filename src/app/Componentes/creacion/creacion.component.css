@@ -76,6 +76,7 @@ textarea{
 
 .anotaciones{
   width: 100%;
+  margin-top: 10px;
 }
 
 #anotaciones_acto{
@@ -113,4 +114,9 @@ textarea{
 .bloque_fiesta{
   display: block;
   margin-top: 10px;
+}
+
+.legend_text{
+  font-size: 30px;
+  margin-bottom: 10px;
 }
