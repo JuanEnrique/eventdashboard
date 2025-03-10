@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { empleado } from '../../Modelos/empleado.model';
+import { CreacionempleadoComponent } from '../creacionempleado/creacionempleado.component';
+
 
 @Component({
   selector: 'app-empleados',
   standalone: true,
-  imports: [],
+  imports: [CreacionempleadoComponent],
   templateUrl: './empleados.component.html',
   styleUrl: './empleados.component.css'
 })
 export class EmpleadosComponent {
+
+  empleado: boolean = false;
 
   empleados:empleado[] = [
     new empleado("Juan", "Pérez", "Juanito el de los palotes", "juan@example.com", "123456789", "12345678A", "123456789012", "Desarrollador", 40, "ES123456789", 1),
@@ -17,5 +21,9 @@ export class EmpleadosComponent {
     new empleado("Laura", "Fernández", "LF", "laura@example.com", "741852963", "36985214D", "852741963852", "Contadora", 38, "ES852741963", 4),
     new empleado("Pedro", "Martínez", "PM", "pedro@example.com", "159753468", "14725836E", "159753468159", "Recursos Humanos", 30, "ES159753468", 5)
   ]
+
+  actformempleado() {
+    this.empleado ? this.empleado = false : this.empleado = true;
+  }
 
 }

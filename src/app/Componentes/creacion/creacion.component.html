@@ -72,7 +72,7 @@
 
 @if(evento){
     <div>
-        <form class="form_evento">
+        <form [formGroup]="formulario_evento" (ngSubmit)="onSubmit_evento()" class="form_evento">
             <fieldset class="datos_graduacion">
                 <legend class="legend_text">Datos principales Evento</legend>
                     <div>
@@ -82,7 +82,7 @@
                     
                     <div>
                         <label>Nombre del Centro:</label>
-                        <input type="text" formControlName="nombre_colegio" />
+                        <input type="text" formControlName="nombre_centro" />
                     </div>
                 
                     <div>
@@ -103,7 +103,8 @@
           
             <fieldset class="datos_acto">
                 <legend class="legend_text">Acto</legend>
-                    <div>
+                @if(mostrarActo){
+                <div>
                     <label>Lugar:</label>
                     <input type="text" formControlName="lugar_acto" />
                 </div>
@@ -113,24 +114,24 @@
                 </div>
                 <div>
                     <label>Número Graduados:</label>
-                    <input type="number" formControlName="nacto_graduados" />
+                    <input type="number" formControlName="numgraduados_acto" />
                 </div>
                 <div>
                     <label>Número Familiares:</label>
-                    <input type="number" formControlName="nacto_familiares" />
+                    <input type="number" formControlName="numfamiliares_acto" />
                 </div>
-                <div>
+                <div class="anotaciones">
                     <label>audiovisuales:</label>
-                    <input type="text" formControlName="audiovisuales" />
+                    <textarea formControlName="audiovisuales"></textarea>
                 </div>
                 <div class="anotaciones">
                     <label>Anotaciones:</label>
-                    <textarea id="anotaciones_acto"></textarea>
-
+                    <textarea id="anotaciones_acto" formControlName="anotaciones_acto"></textarea>
                 </div>
+                }
 
             </fieldset>
-            <fieldset class="datos_cena"> <!--accefi = acto, cena y fiesta-->
+            <fieldset class="datos_cena">
                 <legend class="legend_text">Cena</legend>
 
                     <div>
@@ -145,17 +146,17 @@
                 
                     <div>
                         <label>Número Alumnos:</label>
-                        <input type="number" formControlName="ncena_alumnos" />
+                        <input type="number" formControlName="numalumnos_cena" />
                     </div>
                 
                     <div>
                         <label>Número Profesores:</label>
-                        <input type="number" formControlName="ncena_profesores" />
+                        <input type="number" formControlName="nprofesores_cena" />
                     </div>
 
                     <div class="anotaciones">
                         <label>Anotaciones:</label>
-                        <textarea></textarea>
+                        <textarea formControlName="anotaciones_cena"></textarea>
                     </div>
                     <!-- Modal del menú-->
                     <div>
@@ -163,7 +164,7 @@
 
                         <app-modal [isOpen]="showModal" [title]="'Menú'" (close)="closeModal()">
 
-                            <textarea id="textarea_menu"></textarea>
+                            <textarea id="textarea_menu" formControlName="menu_cena"></textarea>
                             <button type="button" (click)="closeModal()">Cerrar</button>
                         
                         </app-modal>
@@ -186,12 +187,12 @@
                 
                     <div>
                         <label>Número Gratuidades:</label>
-                        <input type="number" formControlName="nfiesta_gratuidades" />
+                        <input type="number" formControlName="numgratuidades_fiesta" />
                     </div>
                 
                     <div>
                         <label>Número Asistentes:</label>
-                        <input type="number" formControlName="nfiesta_asistentes" />
+                        <input type="number" formControlName="numasistentes_fiesta" />
                     </div>
                     <div style="margin-right: 100%;"></div>
                     <div class="bloque_fiesta">
@@ -213,51 +214,51 @@
 
                             
                         <label>
-                        <input type="checkbox" name="servicio" value="sonido_profesional"> Sonido profesional
+                        <input type="checkbox" name="servicio" value="sonido_profesional" formControlName="sonido_profesional"> Sonido profesional
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="iluminacion_robotica"> Iluminación robótica
+                        <input type="checkbox" name="servicio" value="iluminacion_robotica" formControlName="iluminacion_robotica"> Iluminación robótica
                                                 </label><br>
 
                                                 <label>
-                        <input type="checkbox" name="servicio" value="efectos_maquina_humo"> Efectos y máquina de humo
+                        <input type="checkbox" name="servicio" value="efectos_maquina_humo" formControlName="efectos_humo"> Efectos y máquina de humo
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="Guarda_ropa"> Guarda ropa Gratuito
+                        <input type="checkbox" name="servicio" value="Guarda_ropa" formControlName="guardaropa"> Guarda ropa Gratuito
                                                 </label><br>
                                                 
                                                 <label>
-                        <input type="checkbox" name="servicio" value="dj_profesional"> DJ profesional
+                        <input type="checkbox" name="servicio" value="dj_profesional" formControlName="djprofesional"> DJ profesional
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="f otografo"> Fotógrafo
+                        <input type="checkbox" name="servicio" value="fotografo" formControlName="fotografo"> Fotógrafo
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="recena_mcdonalds"> Recena: McDonald's
+                        <input type="checkbox" name="servicio" value="recena_mcdonalds" formControlName="recena_mcdonalds"> Recena: McDonald's
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="recena_burger_king"> Recena: Burger King
+                        <input type="checkbox" name="servicio" value="recena_burger_king" formControlName="recena_burguerking"> Recena: Burger King
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="seguridad_cualificada"> Seguridad cualificada
+                        <input type="checkbox" name="servicio" value="seguridad_cualificada" formControlName="seguridad_cualificada"> Seguridad cualificada
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="animaciones_fotos"> Animaciones para fotos
+                        <input type="checkbox" name="servicio" value="animaciones_fotos" formControlName="animaciones_fotos"> Animaciones para fotos
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="gliter_bar"> Gliter bar
+                        <input type="checkbox" name="servicio" value="glitter_bar" formControlName="glitter_bar"> Gliter bar
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="barra_libre_alcohol"> Barra libre alcohol 6 horas
+                        <input type="checkbox" name="servicio" value="barra_libre_alcohol" formControlName="barra_libre_alcohol"> Barra libre alcohol 6 horas
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="barra_libre_refrescos"> Barra libre refrescos 6 horas
+                        <input type="checkbox" name="servicio" value="barra_libre_refrescos" formControlName="barra_libre_refrescos"> Barra libre refrescos 6 horas
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="5_consumisiones"> 5 consumisiones + barra libre refrescos
+                        <input type="checkbox" name="servicio" value="consumisionesybarra" formControlName="consumisionesybarra"> 5 consumisiones + barra libre refrescos
                                                 </label><br>
                                                 <label>
-                        <input type="checkbox" name="servicio" value="cartucho_gomitas"> Cartucho de gomitas
+                        <input type="checkbox" name="servicio" value="cartucho_gomitas" formControlName="cartucho_gomitas"> Cartucho de gomitas
                                                 </label><br>
                     </div>
                 
@@ -272,19 +273,19 @@
                         
                         -->
                         <label>
-                            <input type="checkbox" name="servicio" value="plataforma_360"> Plataforma 360
+                            <input type="checkbox" name="servicio" value="plataforma_360" formControlName="plataforma_360"> Plataforma 360
                         </label><br>
                         <label>
-                            <input type="checkbox" name="servicio" value="fotomaton"> Fotomaton
+                            <input type="checkbox" name="servicio" value="fotomaton" formControlName="fotomaton"> Fotomaton
                         </label><br>
                         <label>
-                            <input type="checkbox" name="servicio" value="Glitter_bar"> Glitter bar
+                            <input type="checkbox" name="servicio" value="Glitter_bar" formControlName="glitter_bar_free"> Glitter bar
                         </label><br>
                         <label>
-                            <input type="checkbox" name="servicio" value="Glitter_makeup"> Glitter makeup
+                            <input type="checkbox" name="servicio" value="Glitter_makeup" formControlName="glitter_makeup"> Glitter makeup
                         </label><br>
                         <label>
-                            <input type="checkbox" name="servicio" value="asistencia_maquillaje_peluqueria"> Asistencia de maquillaje y peluquería
+                            <input type="checkbox" name="servicio" value="asistencia_maquillaje_peluqueria" formControlName="asist_ma_pe"> Asistencia de maquillaje y peluquería
                         </label><br>
                     </div>
                     
@@ -303,33 +304,33 @@
                         
                         -->
                         <label>
-                            <input type="checkbox" name="recena" value="recena_pizza"> Recena: Pizza
+                            <input type="checkbox" name="recena" value="recena_pizza" formControlName="recena_pizza"> Recena: Pizza
                         </label><br>
                         <label>
-                            <input type="checkbox" name="recena" value="recena-kebab"> Recena: Kebab
+                            <input type="checkbox" name="recena" value="recena_kebab" formControlName="recena_kebab"> Recena: Kebab
                         </label><br>
                         <label>
-                            <input type="checkbox" name="recena" value="recena-mexicana"> Recena: Mexicana
+                            <input type="checkbox" name="recena" value="recena_mexicana" formControlName="recena_mexicana"> Recena: Mexicana
                         </label><br>
                         <label>
-                            <input type="checkbox" name="recena" value="recena-hamburguesas_perritos"> Recena: Hamburguesas y perritos
+                            <input type="checkbox" name="recena" value="recena_hamburguesas_perritos" formControlName="recena_hamburguesas_perritos"> Recena: Hamburguesas y perritos
                         </label><br>
                         <label>
-                            <input type="checkbox" name="adicional" value="tatuajes"> Tatuajes
+                            <input type="checkbox" name="adicional" value="tatuajes" formControlName="tatuajes"> Tatuajes
                         </label><br>
                         <label>
-                            <input type="checkbox" name="adicional" value="cachimba"> Cachimba
+                            <input type="checkbox" name="adicional" value="cachimba" formControlName="cachimba"> Cachimba
                         </label><br>
                     </div>
 
                     <div class="anotaciones">
                         <label>Intolerancias y alergias:</label>
-                        <textarea></textarea>
+                        <textarea formControlName="intolerancias_fiesta"></textarea>
                     </div>
 
                     <div class="anotaciones">
                         <label>Anotaciones:</label>
-                        <textarea></textarea>
+                        <textarea formControlName="anotaciones_fiesta"></textarea>
                     </div>
 
             </fieldset>

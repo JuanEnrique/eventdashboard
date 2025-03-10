@@ -1,1 +1,32 @@
-<p>eventos works!</p>
+<div>
+  <button (click)="actformevento()">Introducir eventos</button>
+</div>
+@if(evento){
+  <app-creacionevento></app-creacionevento>
+}
+<div class="container">
+    <h2>Lista de Eventos</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Expediente</th>
+          <th>Centro</th>
+          <th>Curso</th>
+          <th>Fecha</th>
+          <th>Población</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(evento of eventosjson; track evento.identificador) {
+            <tr>
+              <td>{{ evento.identificador }}</td>
+              <td>{{ evento.curso }}</td>
+              <td>{{ evento.curso }}</td>
+              <td>{{ evento.fecha }}</td>
+              <td>{{ evento.poblacion }}</td>
+        }
+        
+      </tbody>
+    </table>
+  </div>

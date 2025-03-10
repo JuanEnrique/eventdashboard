@@ -1,0 +1,66 @@
+<div>
+    <form [formGroup]="formulario_empleado" (ngSubmit)="onSubmit_empleado()" class="form_empleados">
+        <fieldset class="datos_personales">
+            <legend class="legend_text">Datos Personales</legend>
+                <div>
+                    <label>Nombre:</label>
+                    <input type="text" formControlName="nombre" />
+                </div>
+                
+                <div>
+                    <label>Apellido:</label>
+                    <input type="text" formControlName="apellido" />
+                </div>
+            
+                <div>
+                    <label>Alias:</label>
+                    <input type="text" formControlName="alias" />
+                </div>
+            
+                <div>
+                    <label>Email:</label>
+                    <input type="email" formControlName="email" />
+                </div>
+            
+                <div>
+                    <label>Teléfono:</label>
+                    <input type="text" formControlName="telefono" />
+                </div>
+        </fieldset>
+        
+        <fieldset class="datos_administrativos">
+            <legend class="legend_text">Datos Laborales</legend>
+                <div>
+                    <label>DNI:</label>
+                    <input type="text" formControlName="dni" />
+                </div>
+            
+                <div>
+                    <label>NSS:</label>
+                    <input type="text" formControlName="nss" />
+                </div>
+            
+                <div>
+                    <label>Puesto:</label>
+                    <input type="text" formControlName="puesto" />
+                </div>
+            
+                <div>
+                    <label>Horas:</label>
+                    <input type="number" formControlName="horas" />
+                </div>
+            
+                <div>
+                    <label>IBAN:</label>
+                    <input type="text" formControlName="iban" />
+                </div>
+            
+                <div>
+                    <label>Doc. Prev:</label>
+                    <input type="number" formControlName="docprev" />
+                </div>
+        </fieldset>
+        
+        <button type="submit">Guardar</button>
+        </form>
+</div>

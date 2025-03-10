@@ -32,3 +32,14 @@ table {
   tr:hover {
     background-color: #ddd;
   }
+
+  button {
+    background-color: #FF6400;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px 5px;
+  }
