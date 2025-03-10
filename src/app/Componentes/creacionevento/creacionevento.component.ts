@@ -15,7 +15,6 @@ export class CreacioneventoComponent {
   showModal: boolean = false;
 
   formulario_evento: FormGroup;
-  mostrarActo = false;
   constructor() {
   
     this.formulario_evento = new FormGroup({

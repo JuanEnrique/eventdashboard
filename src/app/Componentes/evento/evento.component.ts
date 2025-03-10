@@ -1,24 +1,20 @@
-import { Component} from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CreacioneventoComponent } from '../creacionevento/creacionevento.component';
-import { Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-eventos',
+  selector: 'app-evento',
   standalone: true,
-  imports: [ReactiveFormsModule, CreacioneventoComponent],
-  templateUrl: './eventos.component.html',
-  styleUrl: './eventos.component.css'
+  imports: [],
+  templateUrl: './evento.component.html',
+  styleUrl: './evento.component.css'
 })
-export class EventosComponent {
+export class EventoComponent {
 
-  evento: boolean = false;
-  router = inject(Router);
-
+  diasRestantes: number = 0;
+  // Simulación de una base de datos (en un servicio podrías obtenerlo desde una API)
   eventosjson=[
     {
-      "identificador": "EXP-2025-001",
+      "id": "EXP-2025-001",
       "nombre_centro": "IES Los Olivos",
       "curso": "2º de Bachillerato",
       "fecha": "2025-06-15",
@@ -53,7 +49,7 @@ export class EventosComponent {
       
     },
     {
-      "identificador": "EXP-2025-002",
+      "id": "EXP-2025-002",
       "nombre_centro": "Colegio San José",
       "curso": "4º de ESO",
       "fecha": "2025-06-20",
@@ -86,15 +82,44 @@ export class EventosComponent {
       
     }
   ];
-  item: any;
 
-  actformevento(){
-    this.evento ? this.evento = false : this.evento = true;
+  elemento: any;
+
+  // Simulación de una base de datos (en un servicio podrías obtenerlo desde una API)
+  elementos = [
+    { id: 'EXP-2025-001', nombre: 'Elemento 1', descripcion: 'Descripción breve', detalles: 'Detalles completos del Elemento 1' },
+    { id: 2, nombre: 'Elemento 2', descripcion: 'Descripción breve', detalles: 'Detalles completos del Elemento 2' }
+  ];
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit() {
+    // Capturar el ID desde la URL
+    const id = this.route.snapshot.paramMap.get('id');
+
+    console.log('ID del evento:', id);
+    
+    // Buscar el elemento en el array
+    this.elemento = this.eventosjson.find(e => e.id === id);
+
+    if (!this.elemento) {
+      alert('Elemento no encontrado');
+      this.router.navigate(['/tabla']); // Redirigir si el ID no es válido
+    }
+     // Ejemplo de uso
+     this.diasRestantes = this.calcularDiasRestantes(this.elemento.fecha);
   }
 
-  verDetalle(id: string) {
-    console.log('Ver detalle del evento con id ' + id);
-     // Inyectamos Router aquí
-    this.router.navigate(['/evento', id]);
+     
+
+  calcularDiasRestantes(fechaObjetivo: string): number {
+    const fechaHoy = new Date();
+    const fechaFinal = new Date(fechaObjetivo);
+    
+    // Calcular la diferencia en días utilizando la diferencia de tiempo
+    return Math.ceil((fechaFinal.getTime() - fechaHoy.getTime()) / (1000 * 3600 * 24));
   }
+  
+
+
 }

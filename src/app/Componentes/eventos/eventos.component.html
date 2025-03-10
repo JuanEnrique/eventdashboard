@@ -19,12 +19,12 @@
       </thead>
       <tbody>
         @for(evento of eventosjson; track evento.identificador) {
-            <tr>
-              <td>{{ evento.identificador }}</td>
-              <td>{{ evento.curso }}</td>
-              <td>{{ evento.curso }}</td>
-              <td>{{ evento.fecha }}</td>
-              <td>{{ evento.poblacion }}</td>
+            <tr (click)="verDetalle(evento.identificador)">
+                <td>{{ evento.identificador }}</td>
+                <td>{{ evento.nombre_centro }}</td>
+                <td>{{ evento.curso }}</td>
+                <td>{{ evento.fecha }}</td>
+                <td>{{ evento.poblacion }}</td>
         }
         
       </tbody>

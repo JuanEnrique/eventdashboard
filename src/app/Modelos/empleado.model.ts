@@ -1,6 +1,5 @@
 export class empleado{
 
-        //propiedades
     nombre: string = "";
     apellido: string= "";
     alias: string= "";
@@ -26,5 +25,4 @@ export class empleado{
         this.iban=iban;
         this.docprev=docprev;
     }
-
 }
