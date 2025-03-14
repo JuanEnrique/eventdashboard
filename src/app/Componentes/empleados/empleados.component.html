@@ -2,41 +2,42 @@
 <div>
   <button (click)="actformempleado()">Introducir empleado</button>
 </div>
-@if(empleado){
+@if(formempleado){
   <app-creacionempleado></app-creacionempleado>
 }
-<h1>Lista de empleados</h1>
+<h1>Lista de empleados desde BBDD</h1>
+
 <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Alias</th>
-        <th>Email</th>
-        <th>Teléfono</th>
-        <th>DNI</th>
-        <th>NSS</th>
-        <th>Puesto</th>
-        <th>Horas</th>
-        <th>IBAN</th>
-        <th>Doc. Prev.</th>
-      </tr>
-    </thead>
-    <tbody>
-        @for (emp of empleados; track emp.dni) {
-            <tr>
-              <td>{{ emp.nombre }}</td>
-              <td>{{ emp.apellido }}</td>
-              <td>{{ emp.alias }}</td>
-              <td>{{ emp.email }}</td>
-              <td>{{ emp.telefono }}</td>
-              <td>{{ emp.dni }}</td>
-              <td>{{ emp.nss }}</td>
-              <td>{{ emp.puesto }}</td>
-              <td>{{ emp.horas }}</td>
-              <td>{{ emp.iban }}</td>
-              <td>{{ emp.docprev }}</td>
-            </tr>
-          }
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Alias</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>DNI</th>
+      <th>NSS</th>
+      <th>Puesto</th>
+      <th>Horas</th>
+      <th>IBAN</th>
+      <th>Doc. Prev.</th>
+    </tr>
+  </thead>
+  <tbody>
+      @for (emp of usuarios; track emp.dni) {
+          <tr>
+            <td>{{ emp.nombre }}</td>
+            <td>{{ emp.apellido }}</td>
+            <td>{{ emp.alias }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.telefono }}</td>
+            <td>{{ emp.dni }}</td>
+            <td>{{ emp.nss }}</td>
+            <td>{{ emp.puesto }}</td>
+            <td>{{ emp.horas }}</td>
+            <td>{{ emp.iban }}</td>
+            <td>{{ emp.docprev }}</td>
+          </tr>
+        }
+  </tbody>
+</table>

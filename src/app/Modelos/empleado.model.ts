@@ -1,28 +1,19 @@
 export class empleado{
 
-    nombre: string = "";
-    apellido: string= "";
-    alias: string= "";
-    email: string= "";
-    telefono: string= "";
-    dni: string= "";
-    nss: string= ""; //numero de la seguridad social
-    puesto: string= "";
-    horas: number=0;
-    iban: string= "";
-    docprev: number=0; //documentacion prevencion
+    constructor(
+        public id: string = "",
+        public nombre: string = "",
+        public apellido: string = "",
+        public alias: string = "",
+        public email: string = "",
+        public telefono: string = "",
+        public dni: string = "",
+        public nss: string = "", // Número de la seguridad social
+        public puesto: string[] = [],
+        public horas: number = 0,
+        public iban: string = "",
+        public docprev: number = 0, // Documentación prevencion
 
-    constructor(nombre: string, apellido: string, alias: string, email: string, telefono: string, dni: string, nss: string, puesto: string, horas: number, iban: string, docprev: number){
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.alias=alias;
-        this.email=email;
-        this.telefono=telefono;
-        this.dni=dni;
-        this.nss=nss;
-        this.puesto=puesto;
-        this.horas=horas;
-        this.iban=iban;
-        this.docprev=docprev;
-    }
+        
+    ) {}
 }

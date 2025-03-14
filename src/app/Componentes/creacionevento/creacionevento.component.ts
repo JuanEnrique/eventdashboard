@@ -45,8 +45,10 @@ export class CreacioneventoComponent {
       guardaropa: new FormControl(''),
       djprofesional: new FormControl(''),
       fotografo: new FormControl(''),
+      /*Recena */
       recena_mcdonalds: new FormControl(''),
       recena_burguerking: new FormControl(''),
+      /*------- */
       seguridad_cualificada: new FormControl(''),
       animaciones_fotos: new FormControl(''),
       glitter_bar: new FormControl(''),
@@ -54,17 +56,25 @@ export class CreacioneventoComponent {
       barra_libre_refrescos: new FormControl(''),
       consumisionesybarra: new FormControl(''),
       cartucho_gomitas: new FormControl(''),
+      /*Maquina*/
       plataforma_360: new FormControl(''),
       fotomaton: new FormControl(''),
+      
+      /*Maquillaje*/
       glitter_bar_free: new FormControl(''),
       glitter_makeup: new FormControl(''),
       asist_ma_pe: new FormControl(''),
+      
+      /*Carrito*/
       recena_pizza: new FormControl(''),
       recena_kebab: new FormControl(''),
       recena_mexicana: new FormControl(''),
       recena_hamburguesas_perritos: new FormControl(''),
+      
+      /*Extras*/
       tatuajes: new FormControl(''),
       cachimba: new FormControl(''),
+      /*---------*/
       intolerancias_fiesta: new FormControl(''),
       anotaciones_fiesta: new FormControl('')
     });

@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreacioneventoComponent } from '../creacionevento/creacionevento.component';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
+import { Bbdd } from '../../services/bbdd.service';
 
 @Component({
   selector: 'app-eventos',
@@ -13,8 +14,22 @@ import { inject } from '@angular/core';
 })
 export class EventosComponent {
 
-  evento: boolean = false;
+  btnevento: boolean = false;
   router = inject(Router);
+  evento: any[] = [];
+
+  constructor(private bbdd: Bbdd) {}
+
+  ngOnInit() {
+    this.bbdd.getEventos().subscribe({
+      next: (data) => {
+        this.evento = data;
+      },
+      error: (error) => {
+        console.error("Error al obtener usuarios:", error);
+      }
+    });
+  }
 
   eventosjson=[
     {
@@ -89,12 +104,16 @@ export class EventosComponent {
   item: any;
 
   actformevento(){
-    this.evento ? this.evento = false : this.evento = true;
+    this.btnevento ? this.btnevento = false : this.btnevento = true;
   }
 
   verDetalle(id: string) {
     console.log('Ver detalle del evento con id ' + id);
      // Inyectamos Router aquí
     this.router.navigate(['/evento', id]);
+  }
+
+  modificardDclick(){
+    console.log("se ha dado doble click en el td");
   }
 }

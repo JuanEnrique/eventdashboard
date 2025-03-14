@@ -1,7 +1,7 @@
 <div>
   <button (click)="actformevento()">Introducir eventos</button>
 </div>
-@if(evento){
+@if(btnevento){
   <app-creacionevento></app-creacionevento>
 }
 <div class="container">
@@ -12,19 +12,73 @@
         <tr>
           <th>Expediente</th>
           <th>Centro</th>
-          <th>Curso</th>
           <th>Fecha</th>
-          <th>Población</th>
+          <th>Reserva</th>
+          <th>Pagos</th>
+          <th>Lugar</th>
+          <th>Ciudad</th>
+          <th>Entregado</th>
+          <th>Menu</th>
+          <th>Carrito</th>
+          <th>Recena</th>
+          <th>Maquina</th>
+          <th>Maquillaje</th>
+          <th>Extra</th>
         </tr>
       </thead>
       <tbody>
         @for(evento of eventosjson; track evento.identificador) {
-            <tr (click)="verDetalle(evento.identificador)">
+            <tr (dblclick)="verDetalle(evento.identificador)">
                 <td>{{ evento.identificador }}</td>
                 <td>{{ evento.nombre_centro }}</td>
-                <td>{{ evento.curso }}</td>
                 <td>{{ evento.fecha }}</td>
+                <td (click)="modificardDclick()"></td>
+                <td></td>
+                <td>{{evento.poblacion}}</td>
+                
+                <td>{{ evento.curso }}</td>
                 <td>{{ evento.poblacion }}</td>
+        }
+        
+      </tbody>
+    </table>
+    <h2>Tabla de la bbdd</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Expediente</th>
+          <th>Centro</th>
+          <th>Fecha</th>
+          <th>Reserva</th>
+          <th>Pagos</th>
+          <th>Lugar</th>
+          <th>Ciudad</th>
+          <th>Entregado</th>
+          <th>Menú</th>
+          <th>Carrito</th>
+          <th>Recena</th>
+          <th>Maquina</th>
+          <th>Maquillaje</th>
+          <th>Extra</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(evento of evento; track evento.identificador) {
+            <tr (dblclick)="verDetalle(evento.id)">
+                <td>{{ evento.expediente }}</td>
+                <td>{{ evento.centro }}</td>
+                <td>{{ evento.fecha }}</td>
+                <td>{{ evento.reserva }}</td>
+                <td>{{ evento.pagos }}</td>
+                <td>{{ evento.lugar_fiesta }}</td>
+                <td>{{ evento.ciudad }}</td><!--Este lugar hay que consultarlo de nuevo-->
+                <td> si no no se</td>
+                <td>{{ evento.menu_cena}}</td>
+                <td>hay que sacar los datos</td>
+                <td>hay que sacar los datos</td>
+                <td>hay que sacar los datos</td>
+                <td>hay que sacar los datos</td>
+                <td>hay que sacar los datos</td>
         }
         
       </tbody>
