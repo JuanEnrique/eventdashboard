@@ -5,43 +5,6 @@
   <app-creacionevento></app-creacionevento>
 }
 <div class="container">
-    <h2>Lista de Eventos</h2>
-  
-    <table>
-      <thead>
-        <tr>
-          <th>Expediente</th>
-          <th>Centro</th>
-          <th>Fecha</th>
-          <th>Reserva</th>
-          <th>Pagos</th>
-          <th>Lugar</th>
-          <th>Ciudad</th>
-          <th>Entregado</th>
-          <th>Menu</th>
-          <th>Carrito</th>
-          <th>Recena</th>
-          <th>Maquina</th>
-          <th>Maquillaje</th>
-          <th>Extra</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(evento of eventosjson; track evento.identificador) {
-            <tr (dblclick)="verDetalle(evento.identificador)">
-                <td>{{ evento.identificador }}</td>
-                <td>{{ evento.nombre_centro }}</td>
-                <td>{{ evento.fecha }}</td>
-                <td (click)="modificardDclick()"></td>
-                <td></td>
-                <td>{{evento.poblacion}}</td>
-                
-                <td>{{ evento.curso }}</td>
-                <td>{{ evento.poblacion }}</td>
-        }
-        
-      </tbody>
-    </table>
     <h2>Tabla de la bbdd</h2>
     <table>
       <thead>
@@ -67,7 +30,7 @@
             <tr (dblclick)="verDetalle(evento.id)">
                 <td>{{ evento.expediente }}</td>
                 <td>{{ evento.centro }}</td>
-                <td>{{ evento.fecha }}</td>
+                <td>{{ formatDate(evento.fecha)}}</td>
                 <td>{{ evento.reserva }}</td>
                 <td>{{ evento.pagos }}</td>
                 <td>{{ evento.lugar_fiesta }}</td>

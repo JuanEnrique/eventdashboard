@@ -48,6 +48,19 @@ app.get("/evento", (req, res) => {
     });
 });
 
+app.get("/evento/:id", (req, res) => {
+    const id = req.params.id; // Captura el ID de la URL
+    db.query("SELECT * FROM evento WHERE id = ?", [id], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (results.length === 0) {
+            res.status(404).send({ message: "Evento no encontrado" });
+        } else {
+            res.json(results[0]); // Devuelve solo el primer resultado
+        }
+    });
+});
+
 // 🔹 Iniciar el Servidor
 app.listen(3000, () => {
     console.log("🚀 Servidor corriendo en http://localhost:3000");

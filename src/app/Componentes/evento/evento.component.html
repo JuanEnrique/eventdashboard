@@ -1,3 +1,5 @@
-<h2>{{ elemento.nombre_centro }}</h2>
-<p>{{elemento.fecha}}</p>
-<p>Quedan <strong>{{diasRestantes}}</strong> días para esta graduación</p>
+<h2>{{evento.centro}}</h2>
+<p><strong>{{evento.curso}}</strong></p>
+<p>Reserva: {{evento.reserva}}</p>
+<p>Pago: {{evento.pagos}}</p>
+<p>Quedan <strong>{{calcularDiasRestantes(evento.fecha)}}</strong> días para esta graduación</p>
