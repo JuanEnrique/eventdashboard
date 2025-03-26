@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(evento of evento; track evento.identificador) {
+        @for(evento of evento; track evento.id) {
             <tr (dblclick)="verDetalle(evento.id)">
                 <td>{{ evento.expediente }}</td>
                 <td>{{ evento.centro }}</td>

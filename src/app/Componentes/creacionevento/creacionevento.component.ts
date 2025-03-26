@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Bbdd } from '../../services/bbdd.service';
 
 @Component({
   selector: 'app-creacionevento',
@@ -13,13 +14,15 @@ export class CreacioneventoComponent {
 
  
   showModal: boolean = false;
+  errorModal: boolean = false;
+  mensaje: string = "";
 
   formulario_evento: FormGroup;
-  constructor() {
+  constructor(private bbdd: Bbdd) {
   
     this.formulario_evento = new FormGroup({
-      identificador: new FormControl(''),
-      nombre_centro: new FormControl(''),
+      id: new FormControl('', Validators.required),
+      nombre_centro: new FormControl('', Validators.required),
       curso: new FormControl(''),
       fecha: new FormControl(''),
       poblacion: new FormControl(''),
@@ -39,41 +42,41 @@ export class CreacioneventoComponent {
       hora_fiesta: new FormControl(''),
       numgratuidades_fiesta: new FormControl(''),
       numasistentes_fiesta: new FormControl(''),
-      sonido_profesional: new FormControl(''),
-      iluminacion_robotica: new FormControl(''),
-      efectos_humo: new FormControl(''),
-      guardaropa: new FormControl(''),
-      djprofesional: new FormControl(''),
-      fotografo: new FormControl(''),
+      sonido_profesional: new FormControl(false),
+      iluminacion_robotica: new FormControl(false),
+      efectos_humo: new FormControl(false),
+      guardaropa: new FormControl(false),
+      djprofesional: new FormControl(false),
+      fotografo: new FormControl(false),
       /*Recena */
-      recena_mcdonalds: new FormControl(''),
-      recena_burguerking: new FormControl(''),
+      recena_mcdonalds: new FormControl(false),
+      recena_burguerking: new FormControl(false),
       /*------- */
-      seguridad_cualificada: new FormControl(''),
-      animaciones_fotos: new FormControl(''),
-      glitter_bar: new FormControl(''),
-      barra_libre_alcohol: new FormControl(''),
-      barra_libre_refrescos: new FormControl(''),
-      consumisionesybarra: new FormControl(''),
-      cartucho_gomitas: new FormControl(''),
+      seguridad_cualificada: new FormControl(false),
+      animaciones_fotos: new FormControl(false),
+      glitter_bar: new FormControl(false),
+      barra_libre_alcohol: new FormControl(false),
+      barra_libre_refrescos: new FormControl(false),
+      consumisionesybarra: new FormControl(false),
+      cartucho_gomitas: new FormControl(false),
       /*Maquina*/
-      plataforma_360: new FormControl(''),
-      fotomaton: new FormControl(''),
+      plataforma_360: new FormControl(false),
+      fotomaton: new FormControl(false),
       
       /*Maquillaje*/
-      glitter_bar_free: new FormControl(''),
-      glitter_makeup: new FormControl(''),
-      asist_ma_pe: new FormControl(''),
+      glitter_bar_free: new FormControl(false),
+      glitter_makeup: new FormControl(false),
+      asist_ma_pe: new FormControl(false),
       
       /*Carrito*/
-      recena_pizza: new FormControl(''),
-      recena_kebab: new FormControl(''),
-      recena_mexicana: new FormControl(''),
-      recena_hamburguesas_perritos: new FormControl(''),
+      recena_pizza: new FormControl(false),
+      recena_kebab: new FormControl(false),
+      recena_mexicana: new FormControl(false),
+      recena_hamburguesas_perritos: new FormControl(false),
       
       /*Extras*/
-      tatuajes: new FormControl(''),
-      cachimba: new FormControl(''),
+      tatuajes: new FormControl(false),
+      cachimba: new FormControl(false),
       /*---------*/
       intolerancias_fiesta: new FormControl(''),
       anotaciones_fiesta: new FormControl('')
@@ -85,9 +88,10 @@ export class CreacioneventoComponent {
 onSubmit_evento() {
   if (this.formulario_evento.valid) {
     console.log('Formulario enviado:', this.formulario_evento.value);
-    console.log('Formulario enviado:', this.formulario_evento.value.nombre);
   } else {
-    console.log('Formulario no válido');
+    this.mensaje = "";
+    this.mensaje= "Error en la validación del formulario"
+    this.errorModal = true;
   }
 }
 
@@ -101,5 +105,11 @@ openModal() {
 closeModal() {
   this.showModal = false;
 };
+
+closeerrorModal() {
+  this.errorModal = false;
+};
+
+
 
 }

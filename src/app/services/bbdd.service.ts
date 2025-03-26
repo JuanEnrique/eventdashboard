@@ -22,4 +22,8 @@ export class Bbdd {
   getEvento(id: number):Observable<any> {
     return this.http.get(`${this.apiUrl}/evento/${id}`)
   }
+
+  getEventoexiste(id: number):Observable<any> {
+    return this.http.get(`${this.apiUrl}/evento/existe/${id}`)
+  }
 }

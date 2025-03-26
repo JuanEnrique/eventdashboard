@@ -4,7 +4,7 @@
             <legend class="legend_text">Datos principales Evento</legend>
                 <div>
                     <label>Número expediente:</label>
-                    <input type="text" formControlName="identificador" />
+                    <input type="text" formControlName="id" />
                 </div>
                 
                 <div>
@@ -202,10 +202,10 @@
                         <input type="checkbox" name="servicio" value="plataforma_360" formControlName="plataforma_360"> Plataforma 360
                     </label><br>
                     <label>
-                        <input type="checkbox" name="servicio" value="fotomaton" formControlName="fotomaton"> Fotomaton
+                        <input type="checkbox" name="servicio" value="fotomaton" formControlName="fotomaton"> Fotomatón
                     </label><br>
                     <label>
-                        <input type="checkbox" name="servicio" value="Glitter_bar" formControlName="glitter_bar_free"> Glitter bar
+                        <input type="checkbox" name="servicio" value="Glitter_bar_free" formControlName="glitter_bar_free"> Glitter bar
                     </label><br>
                     <label>
                         <input type="checkbox" name="servicio" value="Glitter_makeup" formControlName="glitter_makeup"> Glitter makeup
@@ -260,6 +260,15 @@
                 </div>
 
         </fieldset>
+
+        <div>
+            <app-modal [isOpen]="errorModal" [title]="'Error'" (close)="closeModal()">
+
+                <p>{{mensaje}}</p>
+                <button type="button" (click)="closeerrorModal()">Cerrar</button>
+            
+            </app-modal>
+        </div>
       
         <button type="submit">Guardar</button>
       </form>
