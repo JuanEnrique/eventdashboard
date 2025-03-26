@@ -23,7 +23,7 @@ export class Bbdd {
     return this.http.get(`${this.apiUrl}/evento/${id}`)
   }
 
-  getEventoexiste(id: number):Observable<any> {
-    return this.http.get(`${this.apiUrl}/evento/existe/${id}`)
+  registrarEvento(id: string) {
+    return this.http.post("http://localhost:3000/evento", {id});
   }
 }

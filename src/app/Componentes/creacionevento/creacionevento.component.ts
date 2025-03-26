@@ -2,6 +2,8 @@ import { Component} from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Bbdd } from '../../services/bbdd.service';
+import { inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-creacionevento',
@@ -16,9 +18,10 @@ export class CreacioneventoComponent {
   showModal: boolean = false;
   errorModal: boolean = false;
   mensaje: string = "";
+  router = inject(Router);
 
   formulario_evento: FormGroup;
-  constructor(private bbdd: Bbdd) {
+  constructor(private bbdd: Bbdd, private route: ActivatedRoute) {
   
     this.formulario_evento = new FormGroup({
       id: new FormControl('', Validators.required),
@@ -86,13 +89,41 @@ export class CreacioneventoComponent {
 
 
 onSubmit_evento() {
+
+  (id: string)=>{
+    this.router.navigate(['/evento', id]);
+  }
+  console.log(this.formulario_evento.value.id)
+  
+
   if (this.formulario_evento.valid) {
+    this.verificarEvento();
     console.log('Formulario enviado:', this.formulario_evento.value);
   } else {
     this.mensaje = "";
     this.mensaje= "Error en la validación del formulario"
     this.errorModal = true;
   }
+
+}
+
+verificarEvento() {
+
+  this.bbdd.registrarEvento(this.formulario_evento.value.id).subscribe({
+    
+    next: (response: any) => {
+      if (response.existe) {
+        alert(response.mensaje); // "Este evento ya está registrado."
+      } else {
+        alert(response.mensaje); // "Este evento no está registrado."
+      }
+    },
+    error: (error) => {
+      console.log(this.formulario_evento.value.id);
+      console.error("Error en la verificación:", error);
+      alert("Hubo un problema al verificar el evento.");
+    }
+  });
 }
 
 

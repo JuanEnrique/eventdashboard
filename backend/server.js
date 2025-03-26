@@ -61,71 +61,24 @@ app.get("/evento/:id", (req, res) => {
     });
 });
 
+app.post("/evento", (req, res) => {
 
-
-app.post("/evento/registro", (req, res) => {
-    const {
-        identificador, nombre_centro, curso, fecha, poblacion, lugar_acto, 
-        hora_acto, numgraduados_acto, numfamiliares_acto, audiovisuales, 
-        anotaciones_acto, lugar_cena, hora_cena, numalumnos_cena, 
-        nprofesores_cena, anotaciones_cena, menu_cena, lugar_fiesta, 
-        hora_fiesta, numgratuidades_fiesta, numasistentes_fiesta, 
-        sonido_profesional, iluminacion_robotica, efectos_humo, 
-        guardaropa, djprofesional, fotografo, recena_mcdonalds, 
-        recena_burguerking, seguridad_cualificada, animaciones_fotos, 
-        glitter_bar, barra_libre_alcohol, barra_libre_refrescos, 
-        consumisionesybarra, cartucho_gomitas, plataforma_360, 
-        fotomaton, glitter_bar_free, glitter_makeup, asist_ma_pe, 
-        recena_pizza, recena_kebab, recena_mexicana, 
-        recena_hamburguesas_perritos, tatuajes, cachimba, 
-        intolerancias_fiesta, anotaciones_fiesta
-    } = req.body;
-
-    const sql = `INSERT INTO evento (
-        identificador, nombre_centro, curso, fecha, poblacion, lugar_acto, 
-        hora_acto, numgraduados_acto, numfamiliares_acto, audiovisuales, 
-        anotaciones_acto, lugar_cena, hora_cena, numalumnos_cena, 
-        nprofesores_cena, anotaciones_cena, menu_cena, lugar_fiesta, 
-        hora_fiesta, numgratuidades_fiesta, numasistentes_fiesta, 
-        sonido_profesional, iluminacion_robotica, efectos_humo, 
-        guardaropa, djprofesional, fotografo, recena_mcdonalds, 
-        recena_burguerking, seguridad_cualificada, animaciones_fotos, 
-        glitter_bar, barra_libre_alcohol, barra_libre_refrescos, 
-        consumisionesybarra, cartucho_gomitas, plataforma_360, 
-        fotomaton, glitter_bar_free, glitter_makeup, asist_ma_pe, 
-        recena_pizza, recena_kebab, recena_mexicana, 
-        recena_hamburguesas_perritos, tatuajes, cachimba, 
-        intolerancias_fiesta, anotaciones_fiesta
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
-    const values = [
-        identificador, nombre_centro, curso, fecha, poblacion, lugar_acto, 
-        hora_acto, numgraduados_acto, numfamiliares_acto, audiovisuales, 
-        anotaciones_acto, lugar_cena, hora_cena, numalumnos_cena, 
-        nprofesores_cena, anotaciones_cena, menu_cena, lugar_fiesta, 
-        hora_fiesta, numgratuidades_fiesta, numasistentes_fiesta, 
-        sonido_profesional, iluminacion_robotica, efectos_humo, 
-        guardaropa, djprofesional, fotografo, recena_mcdonalds, 
-        recena_burguerking, seguridad_cualificada, animaciones_fotos, 
-        glitter_bar, barra_libre_alcohol, barra_libre_refrescos, 
-        consumisionesybarra, cartucho_gomitas, plataforma_360, 
-        fotomaton, glitter_bar_free, glitter_makeup, asist_ma_pe, 
-        recena_pizza, recena_kebab, recena_mexicana, 
-        recena_hamburguesas_perritos, tatuajes, cachimba, 
-        intolerancias_fiesta, anotaciones_fiesta
-    ];
-
-    db.query(sql, values, (err, result) => {
+    const { id } = req.body;
+    
+    // 🔍 1️⃣ Comprobamos si el evento ya existe
+    db.query("SELECT * FROM evento WHERE expediente = ?", [id], (err, results) => {
         if (err) {
-            console.error("Error al insertar el evento:", err);
-            res.status(500).json({ message: "Error al insertar el evento" });
+            return res.status(500).json({ error: "Error en la consulta a la base de datos" });
+        }
+
+        if (results.length > 0) {
+            // 📛 Si el evento ya existe, enviamos un mensaje de error
+            return res.status(200).json({ existe: true, mensaje: "Este evento ya está registrado." });
         } else {
-            res.status(201).json({ message: "Evento registrado correctamente", id: result.insertId });
+            return res.status(200).json({ existe: false, mensaje: "Este evento no está registrado." });
         }
     });
 });
-
-
 
 
 // 🔹 Iniciar el Servidor
