@@ -24,11 +24,11 @@ export class CreacioneventoComponent {
   constructor(private bbdd: Bbdd, private route: ActivatedRoute) {
   
     this.formulario_evento = new FormGroup({
-      id: new FormControl('', Validators.required),
-      nombre_centro: new FormControl('', Validators.required),
+      expediente: new FormControl('', Validators.required),
+      centro: new FormControl('', Validators.required),
       curso: new FormControl(''),
       fecha: new FormControl(''),
-      poblacion: new FormControl(''),
+      ciudad: new FormControl(''),
       lugar_acto: new FormControl(''),
       hora_acto: new FormControl(''),
       numgraduados_acto: new FormControl(''),
@@ -75,7 +75,7 @@ export class CreacioneventoComponent {
       recena_pizza: new FormControl(false),
       recena_kebab: new FormControl(false),
       recena_mexicana: new FormControl(false),
-      recena_hamburguesas_perritos: new FormControl(false),
+      burger_perrito: new FormControl(false),
       
       /*Extras*/
       tatuajes: new FormControl(false),
@@ -97,7 +97,7 @@ onSubmit_evento() {
   
 
   if (this.formulario_evento.valid) {
-    this.verificarEvento();
+    this.insertEvento();
     console.log('Formulario enviado:', this.formulario_evento.value);
   } else {
     this.mensaje = "";
@@ -107,9 +107,9 @@ onSubmit_evento() {
 
 }
 
-verificarEvento() {
+insertEvento() {
 
-  this.bbdd.registrarEvento(this.formulario_evento.value.id).subscribe({
+  this.bbdd.insertEvento(this.formulario_evento.value).subscribe({
     
     next: (response: any) => {
       if (response.existe) {
@@ -125,6 +125,7 @@ verificarEvento() {
     }
   });
 }
+
 
 
 

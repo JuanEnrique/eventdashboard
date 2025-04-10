@@ -23,7 +23,11 @@ export class Bbdd {
     return this.http.get(`${this.apiUrl}/evento/${id}`)
   }
 
-  registrarEvento(id: string) {
-    return this.http.post("http://localhost:3000/evento", {id});
+  insertEvento(json: any) {
+    return this.http.post("http://localhost:3000/evento", {json});
+  }
+
+  insertEmpleado(json: any) {
+    return this.http.post("http://localhost:3000/empleados", {json});
   }
 }
