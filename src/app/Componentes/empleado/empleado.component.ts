@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Bbdd } from '../../services/bbdd.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-empleado',
@@ -9,8 +12,22 @@ import { Component } from '@angular/core';
 })
 export class EmpleadoComponent {
 
-  name = "Ana";
-  age = 31;
-  puesto = "Gerente";
-  horas = 20;
+  constructor(private bbdd: Bbdd, private route: ActivatedRoute,private location: Location) {}
+
+  empleado: any = {};
+  id: string= '';
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = params['id']; // Convierte el ID a número
+    });
+
+    this.bbdd.getEmpleado(this.id).subscribe({
+      next: (data) => {
+        this.empleado = data;
+      },
+      error: (error) => {
+        console.error("Error al obtener usuarios:", error);
+      }
+    });
+  }
 }

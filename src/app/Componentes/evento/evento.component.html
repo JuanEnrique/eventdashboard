@@ -1,5 +1,22 @@
+<button (click)="goBack()">← Atrás</button>
 <h2>{{evento.centro}}</h2>
 <p><strong>{{evento.curso}}</strong></p>
 <p>Reserva: {{evento.reserva}}</p>
 <p>Pago: {{evento.pagos}}</p>
 <p>Quedan <strong>{{calcularDiasRestantes(evento.fecha)}}</strong> días para esta graduación</p>
+
+<table>
+    <tr>
+        <th>Encargado</th>
+        <th>Camareros</th>
+    </tr>
+    <td>
+        Laura
+    </td>
+    <td>
+        <ul>
+            <li>Juan</li>
+            <li>Pedro</li>
+            <li>María</li>
+        </ul>
+</table>

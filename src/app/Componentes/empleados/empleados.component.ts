@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { empleado } from '../../Modelos/empleado.model';
 import { CreacionempleadoComponent } from '../creacionempleado/creacionempleado.component';
 import { Bbdd } from '../../services/bbdd.service';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 
 
@@ -15,6 +17,7 @@ import { Bbdd } from '../../services/bbdd.service';
 export class EmpleadosComponent /*implements OnInit*/{
 
   formempleado: boolean = false;
+  router = inject(Router);
   usuarios: any[] = [];
 
   constructor(private bbdd: Bbdd) {}
@@ -32,6 +35,10 @@ export class EmpleadosComponent /*implements OnInit*/{
 
   actformempleado() {
     this.formempleado ? this.formempleado = false : this.formempleado = true;
+  }
+
+  verDetalle(id: string) {
+    this.router.navigate(['/empleado', id]);
   }
 
 }

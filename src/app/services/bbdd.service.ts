@@ -14,6 +14,9 @@ export class Bbdd {
     return this.http.get(`${this.apiUrl}/empleado`);
   }
 
+  getEmpleado(id: string):Observable<any> {
+    return this.http.get(`${this.apiUrl}/empleado/${id}`)
+  }
 
   getEventos():Observable<any> {
     return this.http.get(`${this.apiUrl}/evento`)

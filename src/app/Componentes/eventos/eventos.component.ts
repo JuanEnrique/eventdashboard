@@ -41,16 +41,21 @@ export class EventosComponent {
   }
 
   formatDate(fecha: string): string {
-    const meses = [
-      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
-      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-    ];
+    if (fecha === null || fecha === undefined) {
+      return '';
+    }
+    else{
+      const meses = [
+        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+      ];
+      
+      const partes = fecha.split('T')[0].split('-');
+      const mes = meses[+partes[1] - 1];
+      const día = partes[2];
     
-    const partes = fecha.split('T')[0].split('-');
-    const mes = meses[+partes[1] - 1];
-    const día = partes[2];
-  
-    return `${día} de ${mes}`;
+      return `${día} de ${mes}`;
+    }
   }
   Carrito(pizza: boolean,kebeb: boolean,mexicana: boolean,ham_perrito: boolean){
     

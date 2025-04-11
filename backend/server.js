@@ -38,6 +38,19 @@ app.get("/empleado", (req, res) => {
     });
 });
 
+app.get("/empleado/:id", (req, res) => {
+    const id = req.params.id; // Captura el ID de la URL
+    db.query("SELECT * FROM empleado WHERE dni = ?", [id], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (results.length === 0) {
+            res.status(404).send({ message: "Empleado no encontrado" });
+        } else {
+            res.json(results[0]); // Devuelve solo el primer resultado
+        }
+    });
+});
+
 app.get("/evento", (req, res) => {
     db.query("SELECT * FROM evento", (err, results) => {
         if (err) {

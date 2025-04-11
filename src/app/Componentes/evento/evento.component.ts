@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bbdd } from '../../services/bbdd.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-evento',
@@ -11,7 +12,7 @@ import { Bbdd } from '../../services/bbdd.service';
 })
 export class EventoComponent {
 
-  constructor(private bbdd: Bbdd, private route: ActivatedRoute) {}
+  constructor(private bbdd: Bbdd, private route: ActivatedRoute,private location: Location) {}
 
   evento: any = {};
   id: number= 0;
@@ -30,10 +31,6 @@ export class EventoComponent {
     });
   }
 
-
-
-     
-
   calcularDiasRestantes(fechaObjetivo: string): number {
     const fechaHoy = new Date();
     const fechaFinal = new Date(fechaObjetivo);
@@ -42,6 +39,9 @@ export class EventoComponent {
     return Math.ceil((fechaFinal.getTime() - fechaHoy.getTime()) / (1000 * 3600 * 24));
   }
   
+  goBack(): void {
+    this.location.back();
+  }
 
 
 }
