@@ -18,6 +18,10 @@ export class Bbdd {
     return this.http.get(`${this.apiUrl}/empleado/${id}`)
   }
 
+  getDisponibilidad():Observable<any> {
+    return this.http.get(`${this.apiUrl}/empleado`)
+  }
+
   getEventos():Observable<any> {
     return this.http.get(`${this.apiUrl}/evento`)
   }

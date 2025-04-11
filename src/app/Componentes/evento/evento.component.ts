@@ -43,5 +43,42 @@ export class EventoComponent {
     this.location.back();
   }
 
+  formatDate(fecha: string): string {
+    if (fecha === null || fecha === undefined) {
+      return '';
+    }
+    else{
+      const meses = [
+        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+      ];
+      
+      const partes = fecha.split('T')[0].split('-');
+      const mes = meses[+partes[1] - 1];
+      const día = partes[2];
+      const año = partes[0];
+    
+      return `${día} / ${mes} / ${año}`;
+    }
+  }
+
+  introducirTrabajadores() {
+    /*this.bbdd.getDisponibilidad(this.id).subscribe({
+      next: (data) => {
+        this.evento = data;
+      },
+      error: (error) => {
+        console.error("Error al obtener usuarios:", error);
+      }
+    });*/
+
+
+
+
+
+    console.log("evento");
+  }
+
+
 
 }

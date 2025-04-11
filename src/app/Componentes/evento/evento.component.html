@@ -1,22 +1,55 @@
 <button (click)="goBack()">← Atrás</button>
-<h2>{{evento.centro}}</h2>
-<p><strong>{{evento.curso}}</strong></p>
-<p>Reserva: {{evento.reserva}}</p>
-<p>Pago: {{evento.pagos}}</p>
-<p>Quedan <strong>{{calcularDiasRestantes(evento.fecha)}}</strong> días para esta graduación</p>
+<div class="container">
 
-<table>
-    <tr>
-        <th>Encargado</th>
-        <th>Camareros</th>
-    </tr>
-    <td>
-        Laura
-    </td>
-    <td>
-        <ul>
-            <li>Juan</li>
-            <li>Pedro</li>
-            <li>María</li>
-        </ul>
-</table>
+    
+    <div class="information">
+        <div class="relevant-info">
+            <h2>{{evento.centro}}</h2>
+            <p>Fecha: <strong>{{formatDate(evento.fecha)}} </strong> -- quedan <strong>{{calcularDiasRestantes(evento.fecha)}}</strong> días para esta graduación</p>
+            <p><strong>{{evento.curso}}</strong></p>
+            <p>Reserva: {{evento.reserva}}</p>
+            <p>Pago: {{evento.pagos}}</p>
+            
+        </div>
+        <div class="menu-infor">
+            <h2>Menú:</h2>
+            <p class="menu-text">{{evento.menu_cena}}</p>
+        </div>
+    </div>
+    
+    <div class="workers">
+        <h2>Trabajadores asignados</h2>
+        <table>
+            <tr>
+                <th>Encargado</th>
+                <th>Camareros</th>
+            </tr>
+            <td>
+                Laura
+            </td>
+            <td>
+                Juan, Pedro, María
+            </td>
+        </table>
+        <div>
+            <form>
+                <label for="encargado">Encargado:</label>
+                <select id="encargado" name="encargado">
+                    <option value="Laura">Laura</option>
+                    <option value="Juan">Juan</option>
+                    <option value="Pedro">Pedro</option>
+                    <option value="María">María</option>
+                </select>
+                <label for="camareros">Camareros:</label>
+                <select id="encargado" name="encargado">
+                    <option value="Laura">Laura</option>
+                    <option value="Juan">Juan</option>
+                    <option value="Pedro">Pedro</option>
+                    <option value="María">María</option>
+                </select>
+                <button type="submit">Modificar</button>
+            </form>
+        </div>
+        <button (click)="introducirTrabajadores()">Modificar trabajadores</button>
+    </div>
+</div>
