@@ -41,6 +41,15 @@ export class EmpleadosComponent /*implements OnInit*/{
     this.router.navigate(['/empleado', id]);
   }
 
+  getPuesto(encargado: number, camarero: number) {
+    let puesto = "No asignado"
+    if (encargado == 1 && camarero == 1) puesto = "Encargado y Camarero";
+    if (encargado == 1 && camarero != 1) puesto = "Encargado";
+    if (encargado != 1 && camarero == 1) puesto =  "Camarero";
+    return puesto;
+
+  }
+
 }
 
 
