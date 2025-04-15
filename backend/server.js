@@ -40,6 +40,7 @@ app.get("/empleado", (req, res) => {
 
 app.get("/empleado/:id", (req, res) => {
     const id = req.params.id; // Captura el ID de la URL
+
     db.query("SELECT * FROM empleado WHERE dni = ?", [id], (err, results) => {
         if (err) {
             res.status(500).send(err);
@@ -61,8 +62,9 @@ app.get("/evento", (req, res) => {
     });
 });
 
-app.get("/evento/:id", (req, res) => {
+/*app.get("/evento/:id", (req, res) => {
     const id = req.params.id; // Captura el ID de la URL
+    /*const qsql = "select empleado.nombre, evento_empleados.puesto from evento_empleados inner join empleado on evento_empleados.empleado_id = empleado.id where evento_id = ?";
     db.query("SELECT * FROM evento WHERE id = ?", [id], (err, results) => {
         if (err) {
             res.status(500).send(err);
@@ -72,7 +74,56 @@ app.get("/evento/:id", (req, res) => {
             res.json(results[0]); // Devuelve solo el primer resultado
         }
     });
+});*/
+
+
+
+app.get("/evento/:id", (req, res) => {
+    const id = req.params.id;
+
+    // Consulta 1: obtener los datos del evento
+    const eventoQuery = "SELECT * FROM evento WHERE id = ?";
+
+    // Consulta 2: obtener empleados que participan en el evento
+    const empleadosQuery = `
+        SELECT empleado.nombre, evento_empleados.puesto 
+        FROM evento_empleados 
+        INNER JOIN empleado ON evento_empleados.empleado_id = empleado.id 
+        WHERE evento_id = ?`;
+
+    // Ejecutar la primera consulta
+    db.query(eventoQuery, [id], (err, eventoResult) => {
+        if (err) return res.status(500).send({ error: err });
+
+        // Ejecutar la segunda consulta
+        db.query(empleadosQuery, [id], (err, empleadosResult) => {
+            if (err) return res.status(500).send({ error: err });
+
+            // Devolver ambos resultados en un solo objeto JSON
+            res.json({
+                evento: eventoResult[0] || {},
+                empleados: empleadosResult || []
+            });
+        });
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.post("/evento", (req, res) => {
 

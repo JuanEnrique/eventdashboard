@@ -15,6 +15,9 @@ export class EventoComponent {
   constructor(private bbdd: Bbdd, private route: ActivatedRoute,private location: Location) {}
 
   evento: any = {};
+  eventoempleado: any = [];
+  encargado: string = "";
+  camareros: string[] = [];
   id: number= 0;
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -23,12 +26,27 @@ export class EventoComponent {
 
     this.bbdd.getEvento(this.id).subscribe({
       next: (data) => {
-        this.evento = data;
+        /*this.evento = data;*/
+        this.evento = data.evento;
+        this.eventoempleado = data.empleados;
       },
       error: (error) => {
         console.error("Error al obtener usuarios:", error);
       }
     });
+  }
+
+  cargarTrabajadores() {
+
+    this.eventoempleado.forEach((emp: any) => {
+      if(emp.puesto == "camarero"){
+        this.camareros.push(emp.nombre);  // Agregamos el nombre al array
+      }
+      else{
+        this.encargado = emp.nombre;  // Agregamos el nombre al array
+      }
+    });
+
   }
 
   calcularDiasRestantes(fechaObjetivo: string): number {
@@ -62,6 +80,8 @@ export class EventoComponent {
     }
   }
 
+
+
   introducirTrabajadores() {
     /*this.bbdd.getDisponibilidad(this.id).subscribe({
       next: (data) => {
@@ -72,13 +92,10 @@ export class EventoComponent {
       }
     });*/
 
+    this.cargarTrabajadores();
 
-
-
-
-    console.log("evento");
   }
-
+  
 
 
 }

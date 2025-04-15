@@ -31,6 +31,29 @@
                 Juan, Pedro, María
             </td>
         </table>
+        <h3>Tabla con datos de la BBDD</h3>
+        <table>
+            <thead>
+              <tr>
+                <th>Encargado</th>
+                <th>Camarero</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>{{ encargado }}</td>
+                  <td>
+                  @for(camarero of camareros;  track $index; let i = $index){
+                    -{{camarero}}-
+                  }
+                </td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+
+
         <div>
             <form>
                 <label for="encargado">Encargado:</label>
