@@ -21,6 +21,8 @@ export class CreacionempleadoComponent {
   mostrarActo = false;
   router = inject(Router);
   constructor(private bbdd: Bbdd, private route: ActivatedRoute) {
+
+    []
   
     this.formulario_empleado = new FormGroup({
       nombre: new FormControl(''),
@@ -28,16 +30,19 @@ export class CreacionempleadoComponent {
       alias: new FormControl(''),
       email: new FormControl(''),
       telefono: new FormControl(''),
-      dni:new FormControl(''),
+      dni:new FormControl('',Validators.required),
       nss: new FormControl(''),
-      puesto: new FormControl(''),
       horas: new FormControl(''),
       iban: new FormControl(''),
-      docprev: new FormControl('',)
+      docprev: new FormControl(''),
+      encargado: new FormControl(false),
+      camarero: new FormControl(false),
     });
   }
 
   onSubmit_empleado() {
+    /*this.getPuesto();*/
+    console.log(this.formulario_empleado.value.puesto);
     if (this.formulario_empleado.valid) {
       console.log('Formulario enviado:', this.formulario_empleado.value);
       console.log('Formulario enviado:', this.formulario_empleado.value.nombre);
