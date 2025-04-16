@@ -29,6 +29,8 @@ export class EventoComponent {
         /*this.evento = data;*/
         this.evento = data.evento;
         this.eventoempleado = data.empleados;
+
+        this.cargarTrabajadores();
       },
       error: (error) => {
         console.error("Error al obtener usuarios:", error);
@@ -78,22 +80,6 @@ export class EventoComponent {
     
       return `${día} / ${mes} / ${año}`;
     }
-  }
-
-
-
-  introducirTrabajadores() {
-    /*this.bbdd.getDisponibilidad(this.id).subscribe({
-      next: (data) => {
-        this.evento = data;
-      },
-      error: (error) => {
-        console.error("Error al obtener usuarios:", error);
-      }
-    });*/
-
-    this.cargarTrabajadores();
-
   }
   
 

@@ -19,41 +19,30 @@
     
     <div class="workers">
         <h2>Trabajadores asignados</h2>
-        <table>
-            <tr>
-                <th>Encargado</th>
-                <th>Camareros</th>
-            </tr>
-            <td>
-                Laura
-            </td>
-            <td>
-                Juan, Pedro, María
-            </td>
-        </table>
-        <h3>Tabla con datos de la BBDD</h3>
-        <table>
-            <thead>
-              <tr>
-                <th>Encargado</th>
-                <th>Camarero</th>
-              </tr>
-            </thead>
-            <tbody>
+        @if(eventoempleado.length > 0){
+            <table>
+                <thead>
                 <tr>
-                  <td>{{ encargado }}</td>
-                  <td>
-                  @for(camarero of camareros;  track $index; let i = $index){
-                    -{{camarero}}-
-                  }
-                </td>
+                    <th>Encargado</th>
+                    <th>Camarero</th>
                 </tr>
-              
-            </tbody>
-          </table>
-
-
-
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>{{ encargado }}</td>
+                    <td>
+                    @for(camarero of camareros;  track $index; let i = $index){
+                        -{{camarero}}-
+                    }
+                    </td>
+                    </tr>
+                
+                </tbody>
+            </table>
+        }@else {
+            <p>No hay trabajadores asignados a este evento.</p>
+        }
+        
         <div>
             <form>
                 <label for="encargado">Encargado:</label>
@@ -73,6 +62,6 @@
                 <button type="submit">Modificar</button>
             </form>
         </div>
-        <button (click)="introducirTrabajadores()">Modificar trabajadores</button>
+        <button>Modificar trabajadores</button>
     </div>
 </div>
