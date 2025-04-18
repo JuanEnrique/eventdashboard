@@ -53,7 +53,7 @@ app.get("/empleado/:id", (req, res) => {
 });
 
 app.get("/evento", (req, res) => {
-    db.query("SELECT * FROM evento", (err, results) => {
+    db.query("select id,expediente,centro,curso,fecha,reserva,pagos,ciudad from evento", (err, results) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -61,21 +61,6 @@ app.get("/evento", (req, res) => {
         }
     });
 });
-
-/*app.get("/evento/:id", (req, res) => {
-    const id = req.params.id; // Captura el ID de la URL
-    /*const qsql = "select empleado.nombre, evento_empleados.puesto from evento_empleados inner join empleado on evento_empleados.empleado_id = empleado.id where evento_id = ?";
-    db.query("SELECT * FROM evento WHERE id = ?", [id], (err, results) => {
-        if (err) {
-            res.status(500).send(err);
-        } else if (results.length === 0) {
-            res.status(404).send({ message: "Evento no encontrado" });
-        } else {
-            res.json(results[0]); // Devuelve solo el primer resultado
-        }
-    });
-});*/
-
 
 
 app.get("/evento/:id", (req, res) => {
@@ -107,23 +92,6 @@ app.get("/evento/:id", (req, res) => {
         });
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.post("/evento", (req, res) => {
 
@@ -181,6 +149,21 @@ app.post("/empleados", (req, res) => {
             });
             return res.status(200).json({ existe: false, mensaje: "Datos metidos en la bbdd." });
 
+        }
+    });
+});
+
+
+app.patch("/empleado/:id", (req, res) => {
+    const id = req.params.id; // Captura el ID de la URL
+
+    db.query("SELECT * FROM empleado WHERE dni = ?", [id], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (results.length === 0) {
+            res.status(404).send({ message: "Empleado no encontrado" });
+        } else {
+            res.json(results[0]); // Devuelve solo el primer resultado
         }
     });
 });

@@ -59,3 +59,43 @@
     background-color: #fff3ea;
     border-radius: 20px;
   }
+
+
+  /*_____________________Tablas______________________________*/
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #FFC8A4;
+    
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #000;
+  }
+  
+  th {
+    background-color: #F05F00;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #FFA870;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+  
+    .btn-volver {
+      padding: 8px 16px;
+      background-color: #eeeeee;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }

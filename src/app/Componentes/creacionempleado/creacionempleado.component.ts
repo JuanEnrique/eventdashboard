@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Bbdd } from '../../services/bbdd.service';
@@ -19,6 +19,7 @@ export class CreacionempleadoComponent {
 
   formulario_empleado: FormGroup;
   mostrarActo = false;
+  @Input() empleado: any = null;
   router = inject(Router);
   constructor(private bbdd: Bbdd, private route: ActivatedRoute) {
 
@@ -38,6 +39,12 @@ export class CreacionempleadoComponent {
       encargado: new FormControl(false),
       camarero: new FormControl(false),
     });
+  }
+
+  ngOnInit() {
+    if (this.empleado) {
+      this.formulario_empleado.patchValue(this.empleado);
+    }
   }
 
   onSubmit_empleado() {

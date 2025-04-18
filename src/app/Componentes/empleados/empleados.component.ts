@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { empleado } from '../../Modelos/empleado.model';
 import { CreacionempleadoComponent } from '../creacionempleado/creacionempleado.component';
 import { Bbdd } from '../../services/bbdd.service';
 import { Router } from '@angular/router';
@@ -19,6 +18,7 @@ export class EmpleadosComponent /*implements OnInit*/{
   formempleado: boolean = false;
   router = inject(Router);
   usuarios: any[] = [];
+  empleadoSeleccionado: any = null;
 
   constructor(private bbdd: Bbdd) {}
 
@@ -48,6 +48,11 @@ export class EmpleadosComponent /*implements OnInit*/{
     if (encargado != 1 && camarero == 1) puesto =  "Camarero";
     return puesto;
 
+  }
+
+  modificarEmpleado(emp: any) {
+    this.empleadoSeleccionado = emp;
+    this.formempleado = true;
   }
 
 }

@@ -3,7 +3,9 @@
   <button (click)="actformempleado()">Introducir empleado</button>
 </div>
 @if(formempleado){
-  <app-creacionempleado></app-creacionempleado>
+  <app-creacionempleado [empleado]="empleadoSeleccionado">
+    
+  </app-creacionempleado>
 }
 <h1>Lista de empleados desde BBDD</h1>
 
@@ -19,8 +21,7 @@
       <th>NSS</th>
       <th>Puesto</th>
       <th>Horas</th>
-      <th>IBAN</th>
-      <th>Doc. Prev.</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -35,8 +36,7 @@
             <td>{{ emp.nss }}</td>
             <td>{{ getPuesto(emp.encargado, emp.camarero) }}</td>
             <td>{{ emp.horas }}</td>
-            <td>{{ emp.iban }}</td>
-            <td>{{ emp.docprev }}</td>
+            <td><button (click)="modificarEmpleado(emp)">Modificar</button></td>
           </tr>
         }
   </tbody>

@@ -16,6 +16,8 @@ export class EmpleadoComponent {
 
   empleado: any = {};
   id: string= '';
+  puestoencargado: string = 'No';
+  puestocamarero: string = 'No';
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id']; // Convierte el ID a número
@@ -24,10 +26,31 @@ export class EmpleadoComponent {
     this.bbdd.getEmpleado(this.id).subscribe({
       next: (data) => {
         this.empleado = data;
+        this.addPuesto();
       },
       error: (error) => {
         console.error("Error al obtener usuarios:", error);
       }
+      
     });
+
+    
+
   }
+
+  addPuesto(){
+    if(this.empleado.encargado == 1){
+      this.puestoencargado = 'Si';
+    }
+    else{
+      this.puestoencargado = 'No';
+    }
+    if(this.empleado.camarero == 1){
+      this.puestocamarero = 'Si';
+    }
+    else{
+      this.puestocamarero = 'No';
+    }
+  }
+
 }
