@@ -44,18 +44,20 @@ export class CreacionempleadoComponent {
   ngOnInit() {
     if (this.empleado) {
       this.formulario_empleado.patchValue(this.empleado);
+      console.log(this.empleado);
     }
   }
 
   onSubmit_empleado() {
-    /*this.getPuesto();*/
-    console.log(this.formulario_empleado.value.puesto);
-    if (this.formulario_empleado.valid) {
-      console.log('Formulario enviado:', this.formulario_empleado.value);
-      console.log('Formulario enviado:', this.formulario_empleado.value.nombre);
+    if(this.formulario_empleado.valid && this.empleado != null) {
+
+      this.changeEmpleado();
+
+    }else if(this.formulario_empleado.valid){
       this.insertEmpleado();
-    } else {
-      console.log('Formulario no válido');
+    }
+    else{
+        console.log('Formulario no válido');
     }
   }
 
@@ -75,6 +77,26 @@ export class CreacionempleadoComponent {
         alert("Hubo un problema al verificar el empleado.");
       }
     });
+  }
+
+  changeEmpleado() {
+    this.formulario_empleado.value.id = this.empleado.id;
+
+    this.bbdd.changeEmpleado(this.formulario_empleado.value).subscribe({
+      
+      next: (response: any) => {
+        if (response.existe) {
+          alert(response.mensaje); // "Este evento ya está registrado."
+        } else {
+          alert(response.mensaje); // "Este evento no está registrado."
+        }
+      },
+      error: (error) => {
+        console.error("Error en la verificación:", error);
+        alert("Hubo un problema al verificar el empleado.");
+      }
+    });
+
   }
 
 

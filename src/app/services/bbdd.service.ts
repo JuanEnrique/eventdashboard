@@ -37,4 +37,8 @@ export class Bbdd {
   insertEmpleado(json: any) {
     return this.http.post("http://localhost:3000/empleados", {json});
   }
+
+  changeEmpleado(json: any) {
+    return this.http.patch("http://localhost:3000/empleados", {json});
+  }
 }

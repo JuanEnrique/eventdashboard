@@ -154,16 +154,21 @@ app.post("/empleados", (req, res) => {
 });
 
 
-app.patch("/empleado/:id", (req, res) => {
-    const id = req.params.id; // Captura el ID de la URL
+app.patch("/empleados", (req, res) => {
 
-    db.query("SELECT * FROM empleado WHERE dni = ?", [id], (err, results) => {
+    //€€€€ hay que verificar los campos que se han cambiado para que no haya conflictos en la base de datos
+
+    const { json } = req.body;
+
+    const query = jsonToQueryUpdate(json, "empleado");
+
+    db.query(query, (err, results) => {
         if (err) {
             res.status(500).send(err);
         } else if (results.length === 0) {
             res.status(404).send({ message: "Empleado no encontrado" });
         } else {
-            res.json(results[0]); // Devuelve solo el primer resultado
+            return res.status(200).json({ existe: false, mensaje: "Datos actualizados en la bbdd." });
         }
     });
 });
@@ -205,5 +210,27 @@ function jsonToQuery(datos, tabla) {
 
     // Construimos la query SQL
     const sql = `INSERT INTO ${tabla} (${columnas.join(', ')}) VALUES (${valores.join(', ')});`;
+    return sql;
+}
+
+function jsonToQueryUpdate(datos, tabla) {
+    const columnas = [];
+    const id = datos.id; // Obtenemos el id
+
+    // Nos aseguramos de que el id esté presente
+    if (id === undefined) {
+        throw new Error("El objeto datos debe contener una propiedad 'id'");
+    }
+
+    // Iteramos sobre las claves y valores del objeto `datos`
+    for (const clave in datos) {
+        if (datos.hasOwnProperty(clave) && clave !== 'id') {
+            const valor = typeof datos[clave] === 'string' ? `'${datos[clave]}'` : datos[clave];
+            columnas.push(`${clave} = ${valor}`);
+        }
+    }
+
+    // Construimos la query SQL
+    const sql = `UPDATE ${tabla} SET ${columnas.join(', ')} WHERE id = ${id};`;
     return sql;
 }
