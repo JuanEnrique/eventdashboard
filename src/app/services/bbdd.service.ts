@@ -41,4 +41,7 @@ export class Bbdd {
   changeEmpleado(json: any) {
     return this.http.patch("http://localhost:3000/empleados", {json});
   }
+  changeEvento(json: any) {
+    return this.http.patch("http://localhost:3000/evento", {json});
+  }
 }

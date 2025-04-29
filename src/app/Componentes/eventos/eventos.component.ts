@@ -15,13 +15,18 @@ import { ɵBrowserAnimationBuilder } from '@angular/animations';
 })
 export class EventosComponent {
 
-  btnevento: boolean = false;
+  formevento: boolean = false;
   router = inject(Router);
   evento: any[] = [];
+  eventoSeleccionado: any = null;
 
   constructor(private bbdd: Bbdd) {}
 
   ngOnInit() {
+    this.cargarEventos();
+  }
+
+  cargarEventos(){
     this.bbdd.getEventos().subscribe({
       next: (data) => {
         this.evento = data;
@@ -33,7 +38,7 @@ export class EventosComponent {
   }
 
   actformevento(){
-    this.btnevento ? this.btnevento = false : this.btnevento = true;
+    this.formevento ? this.formevento = false : this.formevento = true;
   }
 
   verDetalle(id: string) {
@@ -58,6 +63,19 @@ export class EventosComponent {
     }
   }
   Carrito(pizza: boolean,kebeb: boolean,mexicana: boolean,ham_perrito: boolean){
+    
+  }
+  modificarEvento(evento: any) {
+    this.eventoSeleccionado = evento;
+    this.formevento = true;
+  }
+
+  recargarDatos() {
+    console.log("Entra");
+    
+    this.formevento = false; 
+    this.eventoSeleccionado = null;
+    this.cargarEventos();
     
   }
 }

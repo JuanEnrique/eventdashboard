@@ -1,8 +1,8 @@
 <div>
   <button (click)="actformevento()">Introducir eventos</button>
 </div>
-@if(btnevento){
-  <app-creacionevento></app-creacionevento>
+@if(formevento){
+  <app-creacionevento [evento]="eventoSeleccionado" (recarga)="recargarDatos()"></app-creacionevento>
 }
 <div class="container">
     <h2>Tabla de expedientes</h2>
@@ -16,6 +16,7 @@
           <th>Pagos</th>
           <th>Lugar</th>
           <th>Ciudad</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +28,8 @@
                 <td>{{ evento.reserva }}</td>
                 <td>{{ evento.pagos }}</td>
                 <td>{{ evento.lugar_fiesta }}</td>
-                <td>{{ evento.ciudad }}</td><!--Este lugar hay que consultarlo de nuevo-->
+                <td>{{ evento.ciudad }}</td>
+                <td><button (click)="modificarEvento(evento)">Modificar</button></td>
         }
         
       </tbody>

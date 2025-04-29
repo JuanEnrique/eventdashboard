@@ -53,7 +53,7 @@ app.get("/empleado/:id", (req, res) => {
 });
 
 app.get("/evento", (req, res) => {
-    db.query("select id,expediente,centro,curso,fecha,reserva,pagos,ciudad from evento", (err, results) => {
+    db.query("select * from evento", (err, results) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -167,6 +167,25 @@ app.patch("/empleados", (req, res) => {
             res.status(500).send(err);
         } else if (results.length === 0) {
             res.status(404).send({ message: "Empleado no encontrado" });
+        } else {
+            return res.status(200).json({ existe: false, mensaje: "Datos actualizados en la bbdd." });
+        }
+    });
+});
+
+app.patch("/evento", (req, res) => {
+
+    //€€€€ hay que verificar los campos que se han cambiado para que no haya conflictos en la base de datos
+
+    const { json } = req.body;
+
+    const query = jsonToQueryUpdate(json, "evento");
+
+    db.query(query, (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (results.length === 0) {
+            res.status(404).send({ message: "Evento no encontrado" });
         } else {
             return res.status(200).json({ existe: false, mensaje: "Datos actualizados en la bbdd." });
         }

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Bbdd } from '../../services/bbdd.service';
@@ -17,6 +17,8 @@ export class CreacioneventoComponent {
  
   showModal: boolean = false;
   errorModal: boolean = false;
+  @Input() evento: any = null;
+  @Output() recarga = new EventEmitter<void>();
   mensaje: string = "";
   router = inject(Router);
 
@@ -87,10 +89,25 @@ export class CreacioneventoComponent {
 
 };
 
+ngOnInit() {
+  if (this.evento) {
+    if(this.evento.fecha != null){
+      const fechaFormateada = this.evento.fecha.split('T')[0]; // Formato YYYY-MM-DD
+      this.formulario_evento.patchValue({
+        ...this.evento,
+        fecha: fechaFormateada
+      });
+    }
+    else{
+      this.formulario_evento.patchValue(this.evento);
+    }
+  }
+}
+
 
 onSubmit_evento() {
 
-  (id: string)=>{
+  /*(id: string)=>{
     this.router.navigate(['/evento', id]);
   }
   console.log(this.formulario_evento.value.id)
@@ -103,6 +120,21 @@ onSubmit_evento() {
     this.mensaje = "";
     this.mensaje= "Error en la validación del formulario"
     this.errorModal = true;
+  }*/
+
+
+  if(this.formulario_evento.valid && this.evento != null) {
+
+    this.changeEvento();
+    this.formulario_evento.reset();
+    this.recarga.emit();
+
+  }else if(this.formulario_evento.valid){
+    this.insertEvento();
+
+  }
+  else{
+      console.log('Formulario no válido');
   }
 
 }
@@ -124,6 +156,27 @@ insertEvento() {
       alert("Hubo un problema al verificar el evento.");
     }
   });
+}
+
+changeEvento() {
+  this.formulario_evento.value.id = this.evento.id;
+
+  this.bbdd.changeEvento(this.formulario_evento.value).subscribe({
+    
+    next: (response: any) => {
+      if (response.existe) {
+        console.log(response.mensaje); // "Este evento ya está registrado."
+      } else {
+        console.log(response.mensaje); // "Este evento no está registrado."
+        window.location.reload();
+      }
+    },
+    error: (error) => {
+      console.error("Error en la verificación:", error);
+      alert("Hubo un problema al verificar el evento.");
+    }
+  });
+
 }
 
 
