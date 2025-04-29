@@ -43,25 +43,40 @@
             <p>No hay trabajadores asignados a este evento.</p>
         }
         
+
+        <!-- Modal del menú-->
         <div>
-            <form>
-                <label for="encargado">Encargado:</label>
-                <select id="encargado" name="encargado">
-                    <option value="Laura">Laura</option>
-                    <option value="Juan">Juan</option>
-                    <option value="Pedro">Pedro</option>
-                    <option value="María">María</option>
-                </select>
-                <label for="camareros">Camareros:</label>
-                <select id="encargado" name="encargado">
-                    <option value="Laura">Laura</option>
-                    <option value="Juan">Juan</option>
-                    <option value="Pedro">Pedro</option>
-                    <option value="María">María</option>
-                </select>
-                <button type="submit">Modificar</button>
-            </form>
+            <button type="button" (click)="openModal()">Asignar Trabajadores</button>
+
+            <app-modal [isOpen]="showModal" [title]="'Asignar Trabajadores'" (close)="closeModal()">
+
+                <div>
+                    <form>
+                        <label for="encargado">Encargado:</label>
+                        <select id="encargado" name="encargado">
+                            <option value="Laura">Laura</option>
+                            <option value="Juan">Juan</option>
+                            <option value="Pedro">Pedro</option>
+                            <option value="María">María</option>
+                        </select>
+                        <label for="camareros">Camareros:</label>
+                        <select id="encargado" name="encargado">
+                            <option value="Laura">Laura</option>
+                            <option value="Juan">Juan</option>
+                            <option value="Pedro">Pedro</option>
+                            <option value="María">María</option>
+                        </select>
+                        <button type="submit">Modificar</button>
+                    </form>
+                </div>
+                <button (click)="asignarTrabajadores()">Asignar</button>
+                <button type="button" (click)="closeModal()">Cerrar</button>
+            
+            </app-modal>
+
         </div>
-        <button>Modificar trabajadores</button>
+
+
+        
     </div>
 </div>

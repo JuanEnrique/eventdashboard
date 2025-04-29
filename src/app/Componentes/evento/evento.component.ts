@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bbdd } from '../../services/bbdd.service';
 import { Location } from '@angular/common';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-evento',
   standalone: true,
-  imports: [],
+  imports: [ModalComponent],
   templateUrl: './evento.component.html',
   styleUrl: './evento.component.css'
 })
@@ -14,6 +15,8 @@ export class EventoComponent {
 
   constructor(private bbdd: Bbdd, private route: ActivatedRoute,private location: Location) {}
 
+  showModal: boolean = false;
+  errorModal: boolean = false;
   evento: any = {};
   eventoempleado: any = [];
   encargado: string = "";
@@ -82,6 +85,22 @@ export class EventoComponent {
     }
   }
   
+  asignarTrabajadores(){
+
+  }
+
+  /*---Acciones con el modal del menú*/
+openModal() {
+  this.showModal = true;
+};
+
+closeModal() {
+  this.showModal = false;
+};
+
+closeerrorModal() {
+  this.errorModal = false;
+};
 
 
 }
