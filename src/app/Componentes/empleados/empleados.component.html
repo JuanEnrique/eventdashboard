@@ -3,9 +3,12 @@
   <button (click)="actformempleado()">Introducir empleado</button>
 </div>
 @if(formempleado){
-  <app-creacionempleado [empleado]="empleadoSeleccionado">
+
+  <div>
+    <app-creacionempleado [empleado]="empleadoSeleccionado" (recarga)="recargarDatos()">
     
-  </app-creacionempleado>
+    </app-creacionempleado>
+  </div>
 }
 <h1>Lista de empleados desde BBDD</h1>
 

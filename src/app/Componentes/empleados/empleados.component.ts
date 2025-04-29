@@ -23,6 +23,10 @@ export class EmpleadosComponent /*implements OnInit*/{
   constructor(private bbdd: Bbdd) {}
 
   ngOnInit() {
+    this.cargarUsuarios();
+  }
+  
+  cargarUsuarios() {
     this.bbdd.getEmpleados().subscribe({
       next: (data) => {
         this.usuarios = data;
@@ -53,6 +57,16 @@ export class EmpleadosComponent /*implements OnInit*/{
   modificarEmpleado(emp: any) {
     this.empleadoSeleccionado = emp;
     this.formempleado = true;
+  }
+
+
+  recargarDatos() {
+    console.log("Entra");
+    
+    this.formempleado = false; 
+    this.empleadoSeleccionado = null;
+    this.cargarUsuarios();
+    
   }
 
 }

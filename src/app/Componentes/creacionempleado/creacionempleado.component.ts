@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Bbdd } from '../../services/bbdd.service';
@@ -20,6 +20,7 @@ export class CreacionempleadoComponent {
   formulario_empleado: FormGroup;
   mostrarActo = false;
   @Input() empleado: any = null;
+  @Output() recarga = new EventEmitter<void>();
   router = inject(Router);
   constructor(private bbdd: Bbdd, private route: ActivatedRoute) {
 
@@ -52,9 +53,12 @@ export class CreacionempleadoComponent {
     if(this.formulario_empleado.valid && this.empleado != null) {
 
       this.changeEmpleado();
+      this.formulario_empleado.reset();
+      this.recarga.emit();
 
     }else if(this.formulario_empleado.valid){
       this.insertEmpleado();
+
     }
     else{
         console.log('Formulario no válido');
@@ -69,7 +73,9 @@ export class CreacionempleadoComponent {
         if (response.existe) {
           alert(response.mensaje); // "Este evento ya está registrado."
         } else {
-          alert(response.mensaje); // "Este evento no está registrado."
+          console.log(response.mensaje); // "Este evento no está registrado."
+          this.formulario_empleado.reset();
+          this.recarga.emit();
         }
       },
       error: (error) => {
@@ -86,9 +92,10 @@ export class CreacionempleadoComponent {
       
       next: (response: any) => {
         if (response.existe) {
-          alert(response.mensaje); // "Este evento ya está registrado."
+          console.log(response.mensaje); // "Este evento ya está registrado."
         } else {
-          alert(response.mensaje); // "Este evento no está registrado."
+          console.log(response.mensaje); // "Este evento no está registrado."
+          window.location.reload();
         }
       },
       error: (error) => {
