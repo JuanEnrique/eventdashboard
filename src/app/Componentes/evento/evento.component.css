@@ -50,11 +50,11 @@ tr:hover {
   background-color: #ddd;
 }
 
-  .btn-volver {
-    padding: 8px 16px;
-    background-color: #eeeeee;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  }
+.btn-volver {
+  padding: 8px 16px;
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}

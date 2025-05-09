@@ -10,9 +10,10 @@ app.use(express.json()); // Permite recibir JSON en las peticiones
 const db = mysql.createConnection({
     host: "localhost",      // Servidor de la base de datos
     user: "root",           // Usuario de MySQL
-    password: "MySQL8.0", // Contraseña de MySQL
-    database: "gradmin", // Nombre de la base de datos
-    port: 3306              // Puerto de la base de datos
+    password: "MySQL8.0",   // Contraseña de MySQL
+    database: "gradmin",    // Nombre de la base de datos
+    port: 3306,             // Puerto de la base de datos
+    dateStrings: true       // ⚠️ IMPORTANTE: devuelve fechas como strings para que no reste un día
 });
 
 db.connect(err => {
@@ -71,10 +72,20 @@ app.get("/evento/:id", (req, res) => {
 
     // Consulta 2: obtener empleados que participan en el evento
     const empleadosQuery = `
-        SELECT empleado.nombre, evento_empleados.puesto 
+        SELECT evento_empleados.empleado_id,empleado.nombre, evento_empleados.puesto 
         FROM evento_empleados 
         INNER JOIN empleado ON evento_empleados.empleado_id = empleado.id 
         WHERE evento_id = ?`;
+    
+    const emplDispQuery = `
+        SELECT id, nombre, encargado, camarero 
+        FROM empleado 
+        WHERE id NOT IN (
+            SELECT empleado_id 
+            FROM evento_empleados 
+            WHERE evento_id = 1)
+        AND NOT (encargado = 0 AND camarero = 0);
+    `;
 
     // Ejecutar la primera consulta
     db.query(eventoQuery, [id], (err, eventoResult) => {
@@ -84,10 +95,15 @@ app.get("/evento/:id", (req, res) => {
         db.query(empleadosQuery, [id], (err, empleadosResult) => {
             if (err) return res.status(500).send({ error: err });
 
-            // Devolver ambos resultados en un solo objeto JSON
-            res.json({
-                evento: eventoResult[0] || {},
-                empleados: empleadosResult || []
+            db.query(emplDispQuery, [id], (err, emplDispResult) => {
+                if (err) return res.status(500).send({ error: err });
+    
+                // Devolver ambos resultados en un solo objeto JSON
+                res.json({
+                    evento: eventoResult[0] || {},
+                    empleados: empleadosResult || [],
+                    empleadosdispo: emplDispResult || []
+                });
             });
         });
     });

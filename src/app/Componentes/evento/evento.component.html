@@ -22,23 +22,33 @@
         @if(eventoempleado.length > 0){
             <table>
                 <thead>
-                <tr>
+                  <tr>
                     <th>Encargado</th>
-                    <th>Camarero</th>
-                </tr>
+                    <th>Camareros</th>
+                  </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>{{ encargado }}</td>
+                  <tr>
+                    <!-- Encargado -->
                     <td>
-                    @for(camarero of camareros;  track $index; let i = $index){
-                        -{{camarero}}-
-                    }
+                      @for(encargado of trabajadores; track $index){
+                        @if(encargado.asignadoE == true && encargado.encargado == 1){
+                          {{ encargado.nombre }}<br>
+                        }
+                      }
                     </td>
-                    </tr>
-                
+              
+                    <!-- Camareros -->
+                    <td>
+                      @for(camarero of trabajadores; track $index){
+                        @if(camarero.asignadoC == true && camarero.camarero == 1){
+                          {{ camarero.nombre }}<br>
+                        }
+                      }
+                    </td>
+                  </tr>
                 </tbody>
-            </table>
+              </table>
         }@else {
             <p>No hay trabajadores asignados a este evento.</p>
         }
@@ -46,30 +56,68 @@
 
         <!-- Modal del menú-->
         <div>
-            <button type="button" (click)="openModal()">Asignar Trabajadores</button>
+            <button type="button" (click)="openModal()">Modificar Trabajadores</button>
+            <button (click)="guardarBbdd()">Guardar</button>
 
             <app-modal [isOpen]="showModal" [title]="'Asignar Trabajadores'" (close)="closeModal()">
+
+                <h3>Encargado</h3>
+                <ul>
+                    @for(encargado of trabajadores; track $index; let i = $index){
+                        @if(encargado.asignadoE == true && encargado.encargado == 1){
+                            <li>{{encargado.nombre}} <button (click)=" sacarEmpleado(encargado.id, 'e')">Eliminar</button></li>
+                        }
+                        
+                    }
+                    
+                </ul>
+                <h3>Camareros</h3>
+                <ul>
+                    @for(camarero of trabajadores; track $index; let i = $index){
+                        @if(camarero.asignadoC == true && camarero.camarero == 1){
+                            <li>{{camarero.nombre}} <button (click)=" sacarEmpleado(camarero.id, 'c')">Eliminar</button></li>
+                        }
+                        
+                    }
+
+                </ul>
 
                 <div>
                     <form>
                         <label for="encargado">Encargado:</label>
-                        <select id="encargado" name="encargado">
-                            <option value="Laura">Laura</option>
-                            <option value="Juan">Juan</option>
-                            <option value="Pedro">Pedro</option>
-                            <option value="María">María</option>
+                        <select id="encargados" name="encargados" #selectEncargado>
+                            @for(encargado of trabajadores; track $index; let i = $index){
+                                @if(encargado.asignadoE == false && encargado.encargado == 1){
+                                    <option [value]=encargado.id>{{encargado.nombre}}</option>
+                                }
+                                
+                            }
                         </select>
-                        <label for="camareros">Camareros:</label>
-                        <select id="encargado" name="encargado">
-                            <option value="Laura">Laura</option>
-                            <option value="Juan">Juan</option>
-                            <option value="Pedro">Pedro</option>
-                            <option value="María">María</option>
+
+
+                        <button type="button" (click)="meterEmpleado(+selectEncargado.value, 'e')">Añadir/Cambiar</button>
+                        <br>
+                        <label> Camareros con id: </label>
+                        <select id="camareros" name="camareros" #selectCamarero>
+                            @for(camarero of trabajadores; track $index; let i = $index){
+                                @if(camarero.asignadoC == false && camarero.camarero == 1){
+                                    <option [value]=camarero.id>{{camarero.nombre}}</option>
+                                }
+                                
+                            }
                         </select>
-                        <button type="submit">Modificar</button>
+                        <button type="button" (click)="meterEmpleado(+selectCamarero.value, 'c')">Añadir camarero</button>
                     </form>
                 </div>
-                <button (click)="asignarTrabajadores()">Asignar</button>
+                <div>
+
+                </div>
+
+
+
+
+
+                <button>Guardar</button>
                 <button type="button" (click)="closeModal()">Cerrar</button>
             
             </app-modal>
