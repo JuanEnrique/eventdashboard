@@ -143,7 +143,7 @@ app.post("/empleados", (req, res) => {
 
     const { json } = req.body;
     
-    // 🔍 1️⃣ Comprobamos si el evento ya existe
+    // 🔍 1️⃣ Comprobamos si el empleado ya existe
     db.query("SELECT * FROM empleado WHERE dni = ?", [json.dni], (err, results) => {
         if (err) {
             return res.status(500).json({ error: "Error en la consulta a la base de datos" });
@@ -208,6 +208,41 @@ app.patch("/evento", (req, res) => {
     });
 });
 
+//modifica los trabajadores de un evento
+app.post("/evento/:id", (req, res) => {
+    
+    const { json } = req.body;
+    let query = jsonToQueryUpdateEventoEmpleados(json, "evento_empleados");
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error("Error al insertar el empleado:", err);
+            return res.status(500).json({ error: "Error al insertar el empleado" });
+        }
+
+        // Si la inserción fue exitosa, enviamos una respuesta positiva
+        console.log("Empleados insertado correctamente:", results);
+    });
+    return res.status(200).json({ existe: false, mensaje: "Datos metidos en la bbdd." });
+});
+
+app.delete("/evento/:id", (req, res) => {
+    const id = req.params.id; // Captura el ID de la URL
+    const json = req.body;
+    let query = jsonToQueryDeleteEventoEmpleados(json, "evento_empleados");
+    db.query(query, (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (results.affectedRows === 0) {
+            res.status(404).send({ message: "Empleado no encontrado" });
+        } else {
+            res.json({ message: "Empleado eliminado correctamente" });
+        }
+    });
+});
+
+
+
 
 // 🔹 Iniciar el Servidor
 app.listen(3000, () => {
@@ -268,4 +303,24 @@ function jsonToQueryUpdate(datos, tabla) {
     // Construimos la query SQL
     const sql = `UPDATE ${tabla} SET ${columnas.join(', ')} WHERE id = ${id};`;
     return sql;
+}
+
+function jsonToQueryUpdateEventoEmpleados(datos, tabla) {
+/*
+    const sql = datos.map(datos => 
+        `insert into ${tabla} (evento_id,empleado_id,puesto) values (${datos.evento_id}, ${datos.empleado_id}, '${datos.puesto}')`
+    );
+    const finalQuery = sql.join('; ');(sql);
+    return finalQuery;*/
+      const values = datos
+    .map(d => `(${d.evento_id}, ${d.empleado_id}, '${d.puesto}')`)
+    .join(', ');
+  return `INSERT INTO ${tabla} (evento_id, empleado_id, puesto) VALUES ${values};`;
+}
+
+function jsonToQueryDeleteEventoEmpleados(datos, tabla) {
+  const sql = datos.map(d => 
+    `DELETE FROM ${tabla} WHERE evento_id = ${d.evento_id} AND empleado_id = ${d.empleado_id} AND puesto = '${d.puesto}'`
+  );
+  return sql.join('; ');
 }

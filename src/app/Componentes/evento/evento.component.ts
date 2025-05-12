@@ -108,7 +108,6 @@ export class EventoComponent {
       trabajadorBuscado.asignadoC = true;
       this.camareros.push(trabajadorBuscado.nombre);
     }
-    console.log(this.trabajadores);
   }
   sacarEmpleado(camarero: number, p: string): void {
     if (!camarero) return;
@@ -148,23 +147,46 @@ export class EventoComponent {
 
     const jsonResultado = trabajadoresAñadidos.map((trabajador: any) => {
       return {
-        idEvento: this.id,
-        idTrabajador: trabajador.id,
+        evento_id: this.id,
+        empleado_id: trabajador.id,
         puesto: trabajador.asignadoE ? 'encargado' : trabajador.asignadoC ? 'camarero' : null
       };
     });
 
     const jsonEliminados = trabajadoresEliminados.map((trabajador: any) => {
       return {
-        idEvento: this.id,
-        idTrabajador: trabajador.id,
+        evento_id: this.id,
+        empleado_id: trabajador.id,
         puesto: trabajador.puesto
       };
     });
 
+    if(jsonEliminados.length != 0){
+      this.bbdd.deleteEmplevento(this.id,jsonEliminados).subscribe({
+        next: (data) => {
+          console.log("Se han eliminado los empleados al evento");
+        },
+        error: (error) => {
+          console.error("Error al obtener usuarios:", error);
+        }
+      });
+    }
 
-    console.log(jsonResultado);
-    console.log(jsonEliminados);
+    if(jsonResultado.length != 0){
+      this.bbdd.insertEmplevento(this.id,jsonResultado).subscribe({
+        next: (data) => {
+          console.log("Se han introducido los empleados del evento");
+        },
+        error: (error) => {
+          console.error("Error al obtener usuarios:", error);
+        }
+      });
+    }
+    if(jsonResultado.length != 0 && jsonEliminados.length != 0){
+      alert("No se han añadido empleados al evento");
+    }
+    
+
 
 
 

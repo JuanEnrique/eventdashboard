@@ -44,4 +44,14 @@ export class Bbdd {
   changeEvento(json: any) {
     return this.http.patch("http://localhost:3000/evento", {json});
   }
+
+  insertEmplevento(id:number,json: any) {
+    return this.http.post(`${this.apiUrl}/evento/${id}`, {json});
+  }
+
+  deleteEmplevento(id: number, json: any) {
+    return this.http.delete(`${this.apiUrl}/evento/${id}`, {
+    body: json
+  });
+}
 }
