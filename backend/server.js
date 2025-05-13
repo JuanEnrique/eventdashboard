@@ -42,13 +42,26 @@ app.get("/empleado", (req, res) => {
 app.get("/empleado/:id", (req, res) => {
     const id = req.params.id; // Captura el ID de la URL
 
-    db.query("SELECT * FROM empleado WHERE dni = ?", [id], (err, results) => {
+    const eventosQuery = `
+        SELECT evento.id, evento.expediente, evento.centro, evento.fecha
+        FROM evento_empleados 
+        INNER JOIN evento ON evento_empleados.evento_id = evento.id 
+        WHERE empleado_id = ?`;
+
+    db.query("SELECT * FROM empleado WHERE id = ?", [id], (err, results) => {
         if (err) {
             res.status(500).send(err);
         } else if (results.length === 0) {
             res.status(404).send({ message: "Empleado no encontrado" });
         } else {
-            res.json(results[0]); // Devuelve solo el primer resultado
+            db.query(eventosQuery, [id], (err, eventosResult) => {
+                if (err) return res.status(500).send({ error: err });
+                // Devolver ambos resultados en un solo objeto JSON
+                res.json({
+                    eventos: eventosResult || [],
+                    empleado: results[0] || {}
+                });
+            });
         }
     });
 });
@@ -67,40 +80,48 @@ app.get("/evento", (req, res) => {
 app.get("/evento/:id", (req, res) => {
     const id = req.params.id;
 
-    // Consulta 1: obtener los datos del evento
     const eventoQuery = "SELECT * FROM evento WHERE id = ?";
 
-    // Consulta 2: obtener empleados que participan en el evento
     const empleadosQuery = `
-        SELECT evento_empleados.empleado_id,empleado.nombre, evento_empleados.puesto 
+        SELECT evento_empleados.empleado_id, empleado.nombre, evento_empleados.puesto 
         FROM evento_empleados 
         INNER JOIN empleado ON evento_empleados.empleado_id = empleado.id 
         WHERE evento_id = ?`;
-    
-    const emplDispQuery = `
-        SELECT id, nombre, encargado, camarero 
-        FROM empleado 
-        WHERE id NOT IN (
-            SELECT empleado_id 
-            FROM evento_empleados 
-            WHERE evento_id = 1)
-        AND NOT (encargado = 0 AND camarero = 0);
-    `;
 
-    // Ejecutar la primera consulta
     db.query(eventoQuery, [id], (err, eventoResult) => {
         if (err) return res.status(500).send({ error: err });
+        if (eventoResult.length === 0) {
+            return res.status(404).send({ message: "Evento no encontrado" });
+        }
 
-        // Ejecutar la segunda consulta
+        const evento = eventoResult[0];
+        const fechaEvento = evento.fecha;
+
         db.query(empleadosQuery, [id], (err, empleadosResult) => {
             if (err) return res.status(500).send({ error: err });
 
-            db.query(emplDispQuery, [id], (err, emplDispResult) => {
+            const emplDispQuery = `
+                SELECT e.id, e.nombre, e.encargado, e.camarero
+                FROM empleado e
+                WHERE e.id NOT IN (
+                    SELECT empleado_id
+                    FROM evento_empleados
+                    WHERE evento_id = ?
+                )
+                AND e.id NOT IN (
+                    SELECT ee.empleado_id
+                    FROM evento_empleados ee
+                    INNER JOIN evento ev ON ee.evento_id = ev.id
+                    WHERE ev.fecha = ?
+                )
+                AND NOT (e.encargado = 0 AND e.camarero = 0);
+            `;
+
+            db.query(emplDispQuery, [id, fechaEvento], (err, emplDispResult) => {
                 if (err) return res.status(500).send({ error: err });
-    
-                // Devolver ambos resultados en un solo objeto JSON
+
                 res.json({
-                    evento: eventoResult[0] || {},
+                    evento,
                     empleados: empleadosResult || [],
                     empleadosdispo: emplDispResult || []
                 });

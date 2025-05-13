@@ -29,7 +29,7 @@
   </thead>
   <tbody>
       @for (emp of usuarios; track emp.dni) {
-          <tr (dblclick)="verDetalle(emp.dni)">
+          <tr (dblclick)="verDetalle(emp.id)">
             <td>{{ emp.nombre }}</td>
             <td>{{ emp.apellido }}</td>
             <td>{{ emp.alias }}</td>

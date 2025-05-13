@@ -49,6 +49,8 @@ export class EventoComponent {
         this.evento = data.evento;
         this.eventoempleado = data.empleados;
         this.eventoemplDispo = data.empleadosdispo;
+        console.log(this.eventoempleado);
+        console.log(this.eventoemplDispo);
         this.asignacionTrabajadores();
       },
       error: (error) => {
@@ -93,6 +95,7 @@ export class EventoComponent {
       });
 
     });
+    console.log(this.trabajadores);
   }
   
   meterEmpleado(camarero: number, p: string): void {
@@ -185,17 +188,6 @@ export class EventoComponent {
     if(jsonResultado.length != 0 && jsonEliminados.length != 0){
       alert("No se han añadido empleados al evento");
     }
-    
-
-
-
-
-
-
-
-
-
-
   }
 
 

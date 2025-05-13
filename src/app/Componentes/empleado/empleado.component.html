@@ -20,9 +20,25 @@
             <th>Eventos</th> <!--Colocar enlace al evento-->
             <th>Fecha</th>
             <th>Puesto</th>
-            <th>Confirmación</th>
-            <th>Coche</th>
         </tr>
     </thead>
     <tbody>
+        @for(eventos of eventos; track $index){
+            <tr>
+            <td><a [routerLink]="['/evento/', eventos.id]">{{eventos.centro}}</a></td>
+            <td>{{eventos.fecha}}</td>
+            <td>{{eventos.expediente}}</td>
+            </tr>
+        }
     </tbody>
+</table>
+    <button (click)="openModal()">asignar eventos</button>
+    <!-- Modal del menú-->
+        <div>
+            <app-modal [isOpen]="showModal" [title]="'Asignar Eventos'" (close)="closeModal()">
+
+                <p>Hola</p>
+                <button type="button" (click)="closeModal()">Cerrar</button>
+            </app-modal>
+
+        </div>
